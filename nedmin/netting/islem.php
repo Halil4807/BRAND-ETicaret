@@ -72,7 +72,7 @@ if (isset($_POST['iletisimayarkaydet'])) {
 	
 	//Tablo güncelleme işlemi kodları...
 	$ayarkaydet=$db->prepare("UPDATE ayar SET
-		ayar_tel=:ayar_tel,
+		ayar_tel=:ayar_telefon,
 		ayar_gsm=:ayar_gsm,
 		ayar_faks=:ayar_faks,
 		ayar_mail=:ayar_mail,
@@ -83,7 +83,7 @@ if (isset($_POST['iletisimayarkaydet'])) {
 		WHERE ayar_id=0");
 
 	$update=$ayarkaydet->execute(array(
-		'ayar_tel' => $_POST['ayar_tel'],
+		'ayar_telefon' => $_POST['ayar_tel'],
 		'ayar_gsm' => $_POST['ayar_gsm'],
 		'ayar_faks' => $_POST['ayar_faks'],
 		'ayar_mail' => $_POST['ayar_mail'],
@@ -92,6 +92,7 @@ if (isset($_POST['iletisimayarkaydet'])) {
 		'ayar_adres' => $_POST['ayar_adres'],
 		'ayar_mesai' => $_POST['ayar_mesai']
 		));
+
 
 
 	if ($update) {

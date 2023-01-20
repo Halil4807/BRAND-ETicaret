@@ -76,6 +76,7 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                   <li><a><i class="fa fa-cogs"></i> Ayarlar <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="genel-ayar.php">Genel Ayar</a></li>
+                      <li><a href="iletisim-ayarlar.php">İletişim Ayarları</a></li>
                     </ul>
                   </li>
                 </ul>
