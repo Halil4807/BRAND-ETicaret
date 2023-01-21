@@ -15,7 +15,16 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
 $kullanicisor->execute(array(
   'mail'=>$_SESSION['kullanici_mail']
 ));
+$say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+
+if ($say==0) {
+  header("Location:login.php?durum=izinsiz");
+  exit;
+}
+
+//Kimlik çalma yöntemiyle bu güznlik adımı atlanabiliyor.
+//if(!isset($_SESSION['kullanici_mail'])){}
 
  ?>
 
