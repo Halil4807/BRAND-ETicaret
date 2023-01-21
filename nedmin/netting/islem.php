@@ -37,7 +37,7 @@ if (isset($_POST['admingiris'])) {
 
 
 
-if (isset($_POST['genelayarkaydet'])) {
+if (isset($_POST['genelayarkaydet'])&&($_POST['ayar_title']!=null)) {
 	
 	//Tablo güncelleme işlemi kodları...
 	$ayarkaydet=$db->prepare("UPDATE ayar SET
@@ -68,7 +68,7 @@ if (isset($_POST['genelayarkaydet'])) {
 
 
 
-if (isset($_POST['iletisimayarkaydet'])) {
+if (isset($_POST['iletisimayarkaydet'])&&($_POST['ayar_tel']!=null)) {
 	
 	//Tablo güncelleme işlemi kodları...
 	$ayarkaydet=$db->prepare("UPDATE ayar SET
@@ -140,7 +140,7 @@ else
 	
 }
 
-if (isset($_POST['mailayarkaydet'])) {
+if (isset($_POST['mailayarkaydet'])&&($_POST['ayar_smtphost']!=null)) {
 	
 	//Tablo güncelleme işlemi kodları...
 	$ayarkaydet=$db->prepare("UPDATE ayar SET
@@ -169,7 +169,7 @@ if (isset($_POST['mailayarkaydet'])) {
 	
 }
 
-if (isset($_POST['sosyalayarkaydet'])) {
+if (isset($_POST['sosyalayarkaydet'])&&($_POST['ayar_facebook']!=null)) {
 	
 	//Tablo güncelleme işlemi kodları...
 	$ayarkaydet=$db->prepare("UPDATE ayar SET
@@ -198,7 +198,7 @@ if (isset($_POST['sosyalayarkaydet'])) {
 	
 }
 
-if (isset($_POST['hakkimizdakaydet'])) {
+if (isset($_POST['hakkimizdakaydet'])&&($_POST['hakkimizda_baslik']!=null)) {
 	
 	//Tablo güncelleme işlemi kodları...
 
@@ -207,7 +207,7 @@ if (isset($_POST['hakkimizdakaydet'])) {
 	copy paste işlemlerinde tablo ve işaretli satır isminin değiştirildiğinden emin olun!!!
 
 	*/
-	$ayarkaydet=$db->prepare("UPDATE hakkimizda SET
+	$hakkimizdakaydet=$db->prepare("UPDATE hakkimizda SET
 		hakkimizda_baslik=:hakkimizda_baslik,
 		hakkimizda_icerik=:hakkimizda_icerik,
 		hakkimizda_video=:hakkimizda_video,
@@ -215,7 +215,7 @@ if (isset($_POST['hakkimizdakaydet'])) {
 		hakkimizda_misyon=:hakkimizda_misyon
 		WHERE hakkimizda_id=0");
 
-	$update=$ayarkaydet->execute(array(
+	$update=$hakkimizdakaydet->execute(array(
 		'hakkimizda_baslik' => $_POST['hakkimizda_baslik'],
 		'hakkimizda_icerik' => $_POST['hakkimizda_icerik'],
 		'hakkimizda_video' => $_POST['hakkimizda_video'],

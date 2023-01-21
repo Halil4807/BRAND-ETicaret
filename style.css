@@ -1130,6 +1130,18 @@ html,body {
 .ffacebook {
 	background:url(images/ffacebook.png) no-repeat;
 }
+.fgoogle {
+	background:url(images/fgoogle.png) no-repeat;
+}
+.fgoogle:hover {
+	background:url(images/fgooglehover.png) no-repeat;
+}
+.fyoutube {
+	background:url(images/fyoutube.png) no-repeat;
+}
+.fyoutube:hover {
+	background:url(images/fyoutubehover.png) no-repeat;
+}
 .ffacebook:hover {
 	background:url(images/ffacebookhover.png) no-repeat;
 }

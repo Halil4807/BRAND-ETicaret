@@ -39,9 +39,9 @@
 						<div class="title-widget-cursive">Shopping</div>
 					</div>
 					<ul class="contact-widget">
-						<li class="fphone">+387 123 456, +387 123 456 <br> +387 123 456</li>
-						<li class="fmobile">+387-123-456-1<br>+387-123-456-2</li>
-						<li class="fmail lastone">your@email.com<br>customer.care@mail.com</li>
+						<li class="fphone"><?php echo $ayarcek["ayar_tel"];?> <br><?php echo $ayarcek["ayar_faks"];?></li>
+						<li class="fmobile"><?php echo $ayarcek["ayar_gsm"]; ?></li>
+						<li class="fmail lastone"><?php echo $ayarcek["ayar_mail"]; ?></li>
 					</ul>
 				</div><!--footer contact widget-->
 			</div>
@@ -59,7 +59,7 @@
 						<li><a href="order.htm">Completed Orders</a></li>
 						<li><a href="contact.htm">Contact us</a></li>
 					</ul><!--footer nav-->
-					<div class="f-credit">&copy;All rights reserved by <a href="#">yoursite.com</a></div>
+					<div class="f-credit">&copy;<?php echo $ayarcek["ayar_author"] ?> <a href="https://github.com/Halil4807/BRAND-ETicaret">GitHup</a></div>
 					<a href=""><div class="payment visa"></div></a>
 					<a href=""><div class="payment paypal"></div></a>
 					<a href=""><div class="payment mc"></div></a>
@@ -68,10 +68,27 @@
 				<div class="col-md-3"><!--footer Share-->
 					<div class="followon">Follow us on</div>
 					<div class="fsoc">
-						<a href="http://twitter.com/minimalthemes" class="ftwitter">twitter</a>
-						<a href="http://www.facebook.com/pages/Minimal-Themes/264056723661265" class="ffacebook">facebook</a>
-						<a href="#" class="fflickr">flickr</a>
-						<a href="#" class="ffeed">feed</a>
+						<a href="https://<?php echo $ayarcek["ayar_twitter"]; ?>" class="ftwitter">twitter</a>
+						<a href="https://<?php echo $ayarcek["ayar_facebook"]; ?>" class="ffacebook">facebook</a>
+
+
+						<!-- https://icons8.com/icon/17935/google web sitesinden fgoogle
+							 https://icons8.com/icon/17949/google websitesinden fgooglehover indirilen png görseller BRAND-ETicaret\images klasörünün içine yüklenir.
+							color: FFFFFFD4
+							padding: 4
+							Square: Color: #B1BAC2 
+									Size: %100
+									Corner radius: %100
+									Filled: ok
+									Stroke: no
+
+							style.css
+							.fgoogle {background:url(images/fgoogle.png) no-repeat;}
+							.fgoogle:hover {background:url(images/fgooglehover.png) no-repeat;}
+						-->
+
+						<a href="https://<?php echo $ayarcek["ayar_google"]; ?>" class="fgoogle">Google</a>
+						<a href="https://<?php echo $ayarcek["ayar_youtube"]; ?>" class="fyoutube">Youtube</a>
 						<div class="clearfix"></div>
 					</div>
 					<div class="clearfix"></div>

@@ -1,9 +1,24 @@
+<?php 
+
+include 'nedmin/netting/baglan.php';
+//ID si 0 olan veriyi çek
+$ayarsor=$db->prepare("SELECT * FROM ayar where ayar_id=:id");
+$ayarsor->execute(array(
+  'id'=>0
+));
+$ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shopping Theme</title>
+  	<meta name="description" content="<?php echo $ayarcek["ayar_description"]; ?>">
+  	<meta name="keywords" content="<?php echo $ayarcek["ayar_keywords"]; ?>">
+  	<meta name="author" content="<?php echo $ayarcek["ayar_author"]; ?>">
+    <title><?php echo $ayarcek["ayar_title"]; ?></title>
 
     <!-- Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,400italic,700' rel='stylesheet' type='text/css'>
@@ -33,7 +48,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-6 col-md-4 main-logo">
-					<a href="index-1.htm"><img src="images\logo.png" alt="logo" class="logo img-responsive"></a>
+					<a href="index.php"><img src="images\logo.png" alt="logo" class="logo img-responsive"></a>
 				</div>
 				<div class="col-md-8">
 					<div class="pushright">
