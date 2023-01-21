@@ -1,4 +1,6 @@
 <?php 
+ob_start();
+session_start();
 
 include '../netting/baglan.php';
 //ID si 0 olan veriyi çek
@@ -7,6 +9,13 @@ $ayarsor->execute(array(
   'id'=>0
 ));
 $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
+
+ 
+ $kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
+$kullanicisor->execute(array(
+  'mail'=>$_SESSION['kullanici_mail']
+));
+$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 
  ?>
 
@@ -20,7 +29,7 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>BRAND <?php echo $ayarcek['ayar_title'] ?></title>
+    <title><?php echo $ayarcek['ayar_title'] ?></title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +70,7 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2><?php echo $kullanicicek['kullanici_adsoyad'] ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -120,7 +129,7 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">John Doe
+                    <img src="images/img.jpg" alt=""><?php echo $kullanicicek['kullanici_adsoyad'] ?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
