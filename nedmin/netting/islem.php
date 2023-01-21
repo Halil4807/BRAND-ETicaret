@@ -261,5 +261,24 @@ if (isset($_POST['kullaniciduzenle'])) {
 	}
 
 }
+if ($_GET['kullanicisil']=="ok") {
+	$kullanici_id=$_GET['kullanici_id'];
+
+	$sil=$db->prepare("DELETE FROM kullanici where kullanici_id=:id");
+
+	$kontrol=$sil->execute(array(
+		'id' => $kullanici_id
+	));
+
+
+	if ($kontrol) {
+
+		Header("Location:../production/kullanici.php?sil=ok");
+
+	} else {
+
+		Header("Location:../production/kullanici.php?sil=no");
+	}
+}
 
 ?>
