@@ -11,13 +11,18 @@
                   <div class="x_title">
                     <h2>İletişim Ayarlar<small>
 
+                      <!-- 
+                        isset($_GET['durum'])&& eklenme sebebi aşağıdaki hatayı vermemesi
+                        Warning: Undefined array key "durum" in C:\xampp\htdocs\BRAND-ETicaret\nedmin\production\genel-ayar.php on line 
+                      -->
+                      
                      <?php 
 
-              if ($_GET['durum']=="ok") { ?>
+              if (isset($_GET['durum'])&&$_GET['durum']=="ok") { ?>
 
               <b style="color:green;">İşlem Başarılı...</b>
 
-              <?php } elseif ($_GET['durum']=="no") { ?>
+              <?php } elseif (isset($_GET['durum'])&&$_GET['durum']=="no") { ?>
 
               <b style="color:red;">İşlem Başarısız...</b>
 

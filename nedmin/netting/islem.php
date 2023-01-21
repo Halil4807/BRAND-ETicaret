@@ -107,7 +107,7 @@ if (isset($_POST['iletisimayarkaydet'])) {
 }
 
 
-if (isset($_POST['apiayarkaydet'])) {
+if (isset($_POST['apiayarkaydet'])&&($_POST['ayar_analystic']!=null)) {
 	
 	//Tablo güncelleme işlemi kodları...
 	$ayarkaydet=$db->prepare("UPDATE ayar SET
@@ -135,7 +135,68 @@ if (isset($_POST['apiayarkaydet'])) {
 	}
 	
 }
+else
+{
+	
+}
 
+if (isset($_POST['mailayarkaydet'])) {
+	
+	//Tablo güncelleme işlemi kodları...
+	$ayarkaydet=$db->prepare("UPDATE ayar SET
+		ayar_smtphost=:ayar_smtphost,
+		ayar_smtpuser=:ayar_smtpuser,
+		ayar_smtppassword=:ayar_smtppassword,
+		ayar_smtpport=:ayar_smtpport
+		WHERE ayar_id=0");
+
+	$update=$ayarkaydet->execute(array(
+		'ayar_smtphost' => $_POST['ayar_smtphost'],
+		'ayar_smtpuser' => $_POST['ayar_smtpuser'],
+		'ayar_smtppassword' => $_POST['ayar_smtppassword'],
+		'ayar_smtpport' => $_POST['ayar_smtpport']
+		));
+
+
+	if ($update) {
+
+		header("Location:../production/mail-ayarlar.php?durum=ok");
+
+	} else {
+
+		header("Location:../production/mail-ayarlar.php?durum=no");
+	}
+	
+}
+
+if (isset($_POST['sosyalayarkaydet'])) {
+	
+	//Tablo güncelleme işlemi kodları...
+	$ayarkaydet=$db->prepare("UPDATE ayar SET
+		ayar_facebook=:ayar_facebook,
+		ayar_twitter=:ayar_twitter,
+		ayar_google=:ayar_google,
+		ayar_youtube=:ayar_youtube
+		WHERE ayar_id=0");
+
+	$update=$ayarkaydet->execute(array(
+		'ayar_facebook' => $_POST['ayar_facebook'],
+		'ayar_twitter' => $_POST['ayar_twitter'],
+		'ayar_google' => $_POST['ayar_google'],
+		'ayar_youtube' => $_POST['ayar_youtube']
+		));
+
+
+	if ($update) {
+
+		header("Location:../production/sosyal-ayarlar.php?durum=ok");
+
+	} else {
+
+		header("Location:../production/sosyal-ayarlar.php?durum=no");
+	}
+	
+}
 
 if (isset($_POST['hakkimizdakaydet'])) {
 	

@@ -20,7 +20,7 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>BRAND E-Ticaret</title>
+    <title>BRAND <?php echo $ayarcek['ayar_title'] ?></title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -77,6 +77,9 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
                     <ul class="nav child_menu">
                       <li><a href="genel-ayar.php">Genel Ayar</a></li>
                       <li><a href="iletisim-ayarlar.php">İletişim Ayarları</a></li>
+                      <li><a href="api-ayarlar.php">API Ayarları</a></li>
+                      <li><a href="mail-ayarlar.php">Mail Ayarları</a></li>
+                      <li><a href="sosyal-ayarlar.php">Sosyal Ayarları</a></li>
                     </ul>
                   </li>
                 </ul>
