@@ -263,7 +263,12 @@ if (isset($_POST['kullanici_tc'])&&isset($_POST['kullaniciduzenle'])) {
 
 if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 	$menu_id=$_POST['menu_id'];
-	$menu_seourl=seo($_POST['menu_ad']);
+	$menu_ad=$_POST['menu_ad'];
+	//$menu_seourl=seo($_POST['menu_ad']);
+
+	$menu_seourl=SEOLink($_POST['menu_ad']);
+$ad=$_POST['menu_ad'];
+
 	$ayarkaydet=$db->prepare("UPDATE menu SET
 		menu_sira=:menu_sira,
 		menu_ad=:menu_ad,
@@ -282,31 +287,45 @@ if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 		'menu_seourl' => $menu_seourl,
 		'menu_durum' => $_POST['menu_durum']
 		));
-	if ($update) {Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=ok");} 
+	if ($update) {Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=ok&$menu_ad");} 
 	else {Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=no");}
 }
 
-if (isset($_POST['menu_sira'])&&isset($_POST['menukaydet'])) {
-	$menu_seourl=seo($_POST['menu_ad']);
-	$menukaydet=$db->prepare("INSERT INTO menu SET
-		menu_sira=:menu_sira,
+if (isset($_POST['menukaydet'])) {
+
+
+	$menu_seourl=SEOLink($_POST['menu_ad']);
+
+	$ayarekle=$db->prepare("INSERT INTO menu SET
 		menu_ad=:menu_ad,
-		menu_ust=:menu_ust,
-		menu_url=:menu_url,
 		menu_detay=:menu_detay,
+		menu_url=:menu_url,
+		menu_ust=:menu_ust,
+		menu_sira=:menu_sira,
 		menu_seourl=:menu_seourl,
-		menu_durum=:menu_durum");
-	$insert=$menukaydet->execute(array(
-		'menu_sira' => $_POST['menu_sira'],
+		menu_durum=:menu_durum
+		");
+
+	$insert=$ayarekle->execute(array(
 		'menu_ad' => $_POST['menu_ad'],
-		'menu_ust' => $_POST['menu_ust'],
-		'menu_url' => $_POST['menu_url'],
 		'menu_detay' => $_POST['menu_detay'],
+		'menu_url' => $_POST['menu_url'],
+		'menu_ust' => $_POST['menu_ust'],
+		'menu_sira' => $_POST['menu_sira'],
 		'menu_seourl' => $menu_seourl,
 		'menu_durum' => $_POST['menu_durum']
 		));
-	if ($insert) {Header("Location:../production/menu.php?durum=ok");} 
-	else {Header("Location:../production/menu.php?durum=no");}
+
+
+	if ($insert) {
+		
+		Header("Location:../production/menu.php?durum=ok");
+
+	} else {
+
+		Header("Location:../production/menu.php?durum=no");
+	}
+
 }
 
 if (isset($_POST['gomenu'])) {
