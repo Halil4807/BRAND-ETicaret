@@ -38,7 +38,6 @@ $menusor->execute();
             </small></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li>
-                
                 <a href="menu-ekle.php"><button class="btn btn-success btn-xs">Menu Ekle</button></a>
               </li>
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>

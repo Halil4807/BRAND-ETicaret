@@ -3,6 +3,7 @@ ob_start();
 session_start();
 
 include 'baglan.php';
+include '../production/fonksiyon.php';
 
 if (isset($_POST['admingiris'])) {
 
@@ -232,7 +233,7 @@ if (isset($_POST['hakkimizdakaydet'])&&($_POST['hakkimizda_baslik']!=null)) {
 	
 }
 
-if (isset($_POST['kullaniciduzenle'])) {
+if (isset($_POST['kullanici_tc'])&&isset($_POST['kullaniciduzenle'])) {
 
 	$kullanici_id=$_POST['kullanici_id'];
 
@@ -250,7 +251,6 @@ if (isset($_POST['kullaniciduzenle'])) {
 		'kullanici_durum' => $_POST['kullanici_durum']
 		));
 
-
 	if ($update) {
 
 		Header("Location:../production/kullanici-duzenle.php?kullanici_id=$kullanici_id&durum=ok");
@@ -259,7 +259,42 @@ if (isset($_POST['kullaniciduzenle'])) {
 
 		Header("Location:../production/kullanici-duzenle.php?kullanici_id=$kullanici_id&durum=no");
 	}
+}
+if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 
+	$menu_id=$_POST['menu_id'];
+	$menu_seourl=seo($_POST['menu_ad']);
+	$ayarkaydet=$db->prepare("UPDATE menu SET
+		menu_sira=:menu_sira,
+		menu_ad=:menu_ad,
+		menu_ust=:menu_ust,
+		menu_url=:menu_url,
+		menu_detay=:menu_detay,
+		menu_seourl=:menu_seourl,
+		menu_durum=:menu_durum
+		WHERE menu_id={$_POST['menu_id']}");
+
+	$update=$ayarkaydet->execute(array(
+		'menu_sira' => $_POST['menu_sira'],
+		'menu_ad' => $_POST['menu_ad'],
+		'menu_ust' => $_POST['menu_ust'],
+		'menu_url' => $_POST['menu_url'],
+		'menu_detay' => $_POST['menu_detay'],
+		'menu_seourl' => $menu_seourl,
+		'menu_durum' => $_POST['menu_durum']
+		));
+
+	if ($update) {
+
+		Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=ok");
+
+	} else {
+
+		Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=no");
+	}
+}
+if (isset($_POST['gomenu'])) {
+	Header("Location:../production/menu.php");
 }
 if ($_GET['kullanicisil']=="ok") {
 	$kullanici_id=$_GET['kullanici_id'];
