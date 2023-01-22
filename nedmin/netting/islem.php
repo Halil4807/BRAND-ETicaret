@@ -260,8 +260,8 @@ if (isset($_POST['kullanici_tc'])&&isset($_POST['kullaniciduzenle'])) {
 		Header("Location:../production/kullanici-duzenle.php?kullanici_id=$kullanici_id&durum=no");
 	}
 }
-if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 
+if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 	$menu_id=$_POST['menu_id'];
 	$menu_seourl=seo($_POST['menu_ad']);
 	$ayarkaydet=$db->prepare("UPDATE menu SET
@@ -273,7 +273,6 @@ if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 		menu_seourl=:menu_seourl,
 		menu_durum=:menu_durum
 		WHERE menu_id={$_POST['menu_id']}");
-
 	$update=$ayarkaydet->execute(array(
 		'menu_sira' => $_POST['menu_sira'],
 		'menu_ad' => $_POST['menu_ad'],
@@ -283,37 +282,51 @@ if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 		'menu_seourl' => $menu_seourl,
 		'menu_durum' => $_POST['menu_durum']
 		));
-
-	if ($update) {
-
-		Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=ok");
-
-	} else {
-
-		Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=no");
-	}
+	if ($update) {Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=ok");} 
+	else {Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=no");}
 }
+
+if (isset($_POST['menu_sira'])&&isset($_POST['menukaydet'])) {
+	$menu_seourl=seo($_POST['menu_ad']);
+	$menukaydet=$db->prepare("INSERT INTO menu SET
+		menu_sira=:menu_sira,
+		menu_ad=:menu_ad,
+		menu_ust=:menu_ust,
+		menu_url=:menu_url,
+		menu_detay=:menu_detay,
+		menu_seourl=:menu_seourl,
+		menu_durum=:menu_durum");
+	$insert=$menukaydet->execute(array(
+		'menu_sira' => $_POST['menu_sira'],
+		'menu_ad' => $_POST['menu_ad'],
+		'menu_ust' => $_POST['menu_ust'],
+		'menu_url' => $_POST['menu_url'],
+		'menu_detay' => $_POST['menu_detay'],
+		'menu_seourl' => $menu_seourl,
+		'menu_durum' => $_POST['menu_durum']
+		));
+	if ($insert) {Header("Location:../production/menu.php?durum=ok");} 
+	else {Header("Location:../production/menu.php?durum=no");}
+}
+
 if (isset($_POST['gomenu'])) {
 	Header("Location:../production/menu.php");
 }
+
 if ($_GET['kullanicisil']=="ok") {
 	$kullanici_id=$_GET['kullanici_id'];
-
 	$sil=$db->prepare("DELETE FROM kullanici where kullanici_id=:id");
+	$kontrol=$sil->execute(array('id' => $kullanici_id));
+	if ($kontrol) {Header("Location:../production/kullanici.php?sil=ok");} 
+	else {Header("Location:../production/kullanici.php?sil=no");}
+}
 
-	$kontrol=$sil->execute(array(
-		'id' => $kullanici_id
-	));
-
-
-	if ($kontrol) {
-
-		Header("Location:../production/kullanici.php?sil=ok");
-
-	} else {
-
-		Header("Location:../production/kullanici.php?sil=no");
-	}
+if ($_GET['menusil']=="ok") {
+	$menu_id=$_GET['menu_id'];
+	$sil=$db->prepare("DELETE FROM menu where menu_id=:id");
+	$kontrol=$sil->execute(array('id' => $menu_id));
+	if ($kontrol) {Header("Location:../production/menu.php?sil=ok");} 
+	else {Header("Location:../production/menu.php?sil=no");}
 }
 
 ?>
