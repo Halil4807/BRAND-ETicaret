@@ -95,6 +95,7 @@ if ($say==0) {
                   <li><a href="index.php"><i class="fa fa-home"></i> Anasayfa</a></li>
                   <li><a href="hakkimizda.php"><i class="fa fa-info"></i> Hakkimizda </span></a>
                   <li><a href="kullanici.php"><i class="fa fa-user"></i> Kullanıcılar </span></a>
+                  <li><a href="menu.php"><i class="fa fa-list"></i> Menüler </span></a>
                   <li><a><i class="fa fa-cogs"></i> Ayarlar <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="genel-ayar.php">Genel Ayar</a></li>
