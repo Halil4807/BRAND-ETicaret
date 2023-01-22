@@ -13,9 +13,10 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
 #404 hata sayfası yönlendirme kodu
-#ErrorDocument 404 http://localhost/BRAND-ETicaret/
+#ErrorDocument 404 http://www.joyakademi.com
 
 
+RewriteRule ^sayfa-([0-9a-zA-Z-_]+)  menu-detay.php?sef=$1 [L,QSA]
 
 
 
@@ -41,7 +42,6 @@ RewriteRule ^bize-ulasin$ iletisim.php [NC,L]
 RewriteRule ^sitemap.xml$ sitemap.php [NC,L]
 
 
-RewriteRule ^kategori-([0-9a-zA-Z-_]+)  egitimler.php?sef=$1 [L,QSA]
 RewriteRule ^haber-([0-9a-zA-Z-_]+)-([0-9]+)$  haber-detay.php?sef=$1&icerik_id=$2 [L,QSA]
 RewriteRule ^sayfa-([0-9a-zA-Z-_]+)-([0-9]+)$  menu-detay.php?sef=$1&menu_id=$2 [L,QSA]
 RewriteRule ^video-([0-9a-zA-Z-_]+)-([0-9]+)$  video-detay.php?sef=$1&video_id=$2 [L,QSA]

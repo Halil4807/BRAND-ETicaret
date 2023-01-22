@@ -64,6 +64,19 @@ $menucek=$menusor->fetch(PDO::FETCH_ASSOC);
                             <input type="hidden" name="menu_id" value="<?php echo $menucek['menu_id']; ?>">
                             
                             <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menu Linki <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="first-name" disabled=""  value="<?php 
+                                if (!empty($menucek["menu_url"])) {
+                                  echo $ayarcek["ayar_url"].$menucek['menu_url'];
+                                }
+                                else{echo $ayarcek["ayar_url"]."sayfa-".$menucek["menu_seourl"];}
+                                ?>" class="form-control col-md-7 col-xs-12">
+                              </div>
+                            </div>
+
+                            <div class="form-group">
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menu Sıra <span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
@@ -87,10 +100,10 @@ $menucek=$menusor->fetch(PDO::FETCH_ASSOC);
                             </div>
 
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü URL <span class="required">*</span></label>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü URL <span class="">*</span></label>
                               
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" name="menu_url" value="<?php echo $menucek['menu_url'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="first-name" name="menu_url" value="<?php echo $menucek['menu_url'] ?>"  class="form-control col-md-7 col-xs-12">
                               </div>
                             </div>
                             <div class="form-group">

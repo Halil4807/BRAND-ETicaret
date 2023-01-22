@@ -129,7 +129,23 @@ $menusor->execute(array('durum'=>1));
 
 
     									<?php while ($menucek=$menusor->fetch(PDO::FETCH_ASSOC)) { ?> 
-    										<li><a href="<?php echo $menucek["menu_url"]; ?>"><?php echo $menucek["menu_ad"]; ?></a></li>
+    										<li><a href="    											
+    											<?php 
+    											if (!empty($menucek["menu_url"])) {
+    												echo $menucek["menu_url"]; 
+    											}
+    											else{
+    												echo "sayfa-".$menucek["menu_seourl"]; 
+    											}
+
+
+
+    											    											?>
+
+
+
+
+    											"><?php echo $menucek["menu_ad"]; ?></a></li>
     									<?php } ?>
 
 
