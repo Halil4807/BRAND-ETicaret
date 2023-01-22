@@ -53,17 +53,17 @@
 			<div class="row">
 				<div class="col-md-9">
 					<ul class="footermenu"><!--footer nav-->
-						<li><a href="index-1.htm">Home</a></li>
-						<li><a href="cart.htm">My Cart</a></li>
-						<li><a href="checkout.htm">Checkout</a></li>
-						<li><a href="order.htm">Completed Orders</a></li>
-						<li><a href="contact.htm">Contact us</a></li>
+						<li><a href="index-1.htm"> </a></li>
+						<li><a href="cart.htm"> </a></li>
+						<li><a href="checkout.htm"></a></li>
+						<li><a href="order.htm"></a></li>
+						<li><a href="contact.htm"></a></li>
 					</ul><!--footer nav-->
 					<div class="f-credit">&copy;<?php echo $ayarcek["ayar_author"] ?> <a href="https://github.com/Halil4807/BRAND-ETicaret">GitHup</a></div>
-					<a href=""><div class="payment visa"></div></a>
-					<a href=""><div class="payment paypal"></div></a>
-					<a href=""><div class="payment mc"></div></a>
-					<a href=""><div class="payment nh"></div></a>
+					<div class="payment visa"></div>
+					<div class="payment paypal"></div>
+					<div class="payment mc"></div>
+					<div class="payment nh"></div>
 				</div>
 				<div class="col-md-3"><!--footer Share-->
 					<div class="followon">Follow us on</div>
