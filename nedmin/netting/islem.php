@@ -34,6 +34,30 @@ if (isset($_POST['admingiris'])) {
 }
 
 
+if (isset($_POST['logoduzenle'])) {
+	$uploads_dir = '../../dimg';
+
+	@$tmp_name = $_FILES['ayar_logo']["tmp_name"];
+	@$name = $_FILES['ayar_logo']["name"];
+
+	$time=date("dmyHis");
+	$refimgyol=substr($uploads_dir, 6)."/".$time.$name;
+
+	@move_uploaded_file($tmp_name, "$uploads_dir/$time$name");
+	
+	$duzenle=$db->prepare("UPDATE ayar SET
+		ayar_logo=:logo
+		WHERE ayar_id=0");
+	$update=$duzenle->execute(array('logo' => $refimgyol ));
+
+	if ($update) {
+		$resimsilunlink=$_POST['eski_yol'];
+		unlink("../../$resimsilunlink");
+		Header("Location:../production/genel-ayar.php?durum=ok");
+	} else {
+		Header("Location:../production/genel-ayar.php?durum=no");
+	}
+}
 
 if (isset($_POST['genelayarkaydet'])&&($_POST['ayar_title']!=null)) {
 	
