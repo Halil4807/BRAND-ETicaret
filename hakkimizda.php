@@ -70,7 +70,7 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
 
 
 		<!-- Sidebar buraya gelecek -->
-		<?php include 'sidebar.php'; ?>
+		
 
 
 	</div>

@@ -29,17 +29,7 @@ $menucek=$menusor->fetch(PDO::FETCH_ASSOC);
 				</p>
 
 			</div>
-
-
-
-
-		</div>
-
-
-
-
-		<!-- Sidebar buraya gelecek -->
-		<?php include 'sidebar.php'; ?>
+		</div>		
 
 
 	</div>

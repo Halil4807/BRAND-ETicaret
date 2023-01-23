@@ -60,7 +60,23 @@ if (isset($_POST['admingiris'])) {
 		header("Location:../production/login.php?durum=no");
 		exit;
 	}	
+}
 
+if (isset($_POST['kullanicigiris'])) {
+	$kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail and kullanici_password=:password");
+	$kullanicisor->execute(array(
+		'mail' => $_POST['kullanici_mail'],
+		'password' => md5($_POST['kullanici_password'])
+	));
+	$say=$kullanicisor->rowCount();
+	if ($say==1) {		
+		$_SESSION['kullanici_mail']=$_POST['kullanici_mail'];
+		header("Location:../../index.php");
+		exit;
+	} else {
+		header("Location:../../index.php?durum=no");
+		exit;
+	}	
 }
 
 

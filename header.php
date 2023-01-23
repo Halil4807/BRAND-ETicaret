@@ -14,6 +14,13 @@ $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
 $menusor=$db->prepare("SELECT * FROM menu where menu_durum=:durum order by menu_sira ASC limit 5");
 $menusor->execute(array('durum'=>1));
 
+if (isset($_SESSION['kullanici_mail'])) {
+	$kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
+	$kullanicisor->execute(array(
+		'mail'=>$_SESSION['kullanici_mail']
+	));
+	$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
@@ -56,163 +63,157 @@ $menusor->execute(array('durum'=>1));
     					<div class="col-xs-6 col-md-4 main-logo">
     						<a href="index.php"><img width="60" src="<?php echo $ayarcek["ayar_logo"]; ?>" alt="Site logosu" class="logo img-responsive"></a>
     					</div>
-
-
-    					<div class="col-md-8">
+    					<div  class="col-md-8">
     						<div class="pushright">
     							<div class="top">
-    								<a href="#" id="reg" class="btn btn-default btn-dark">Giriş Yap<span>-- veya --</span>Kayıt Ol</a>
-    									<div class="regwrap">
-    										<div class="row">
-    											<div class="col-md-6 regform">
-    												<div class="title-widget-bg">
-    													<div class="title-widget">Kullanıcı Girişi</div>
-    												</div>
-    												<form role="form">
-    													<div class="form-group">
-    														<input type="text" class="form-control" id="kullanıcı_mail" placeholder="Mail Adresi Giriniz!">
-    													</div>
-    													<div class="form-group">
-    														<input type="password" class="form-control" id="password" placeholder="Şifre Giriniz!">
-    													</div>
-    													<div class="form-group">
-    														<button class="btn btn-default btn-red btn-sm">Giriş Yap</button>
-    													</div>
-    												</form>
+    								<?php if( !isset($_SESSION['kullanici_mail'])){?>
+    									<a href="#" id="reg" class="btn btn-default btn-dark">Giriş Yap<span>-- veya --</span>Kayıt Ol</a>
+    								<?php } else {?>
+    									<a href="#"  class="btn btn-default btn-dark">Hoşgeldin <?php echo $kullanicicek['kullanici_adsoyad']; ?></a>
+    							<?php } ?>
+    								<div class="regwrap">
+    									<div  class="row">
+    										<div class="col-md-6 regform">
+    											<div class="title-widget-bg">
+    												<div class="title-widget">Kullanıcı Girişi</div>
     											</div>
-    											<div class="col-md-6">
-    												<div class="title-widget-bg">
-    													<div class="title-widget">Kayıt Ol</div>
+    											<form action="nedmin/netting/islem.php" method="POST" class="signin-form">
+    												<div class="form-group">
+    													<input type="text" name="kullanici_mail" class="form-control" class="form-control" id="kullanıcı_mail" placeholder="Mail Adresi Giriniz!">
     												</div>
-    												<p>
-    													Yeni kullanıcı? Bir hesap oluşturarak daha hızlı alışveriş yapabilir, bir siparişin durumundan haberdar olabilirsiniz...
-    												</p>
-    												<a href="register.php"> <button class="btn btn-default btn-yellow">Şimdi Kayıt Ol</button></a>
+    												<div class="form-group">
+    													<input type="password" name="kullanici_password" type="password" class="form-control" id="password" placeholder="Şifre Giriniz!">
+    												</div>
+    												<div class="form-group">
+    													<button name="kullanicigiris" class="btn btn-default btn-red btn-sm">Giriş Yap</button>
+    												</div>
+    											</form>
+    										</div>
+    										<div class="col-md-6">
+    											<div class="title-widget-bg">
+    												<div class="title-widget">Kayıt Ol</div>
     											</div>
+    											<p>
+    												Yeni kullanıcı? Bir hesap oluşturarak daha hızlı alışveriş yapabilir, bir siparişin durumundan haberdar olabilirsiniz...
+    											</p>
+    											<a href="register.php"> <button class="btn btn-default btn-yellow">Şimdi Kayıt Ol</button></a>
     										</div>
     									</div>
-    									<div class="srch-wrap">
-    										<a href="#" id="srch" class="btn btn-default btn-search"><i class="fa fa-search"></i></a>
-    									</div>
-    									<div class="srchwrap">
-    										<div class="row">
-    											<div class="col-md-12">
-    												<form class="form-horizontal" role="form">
-    													<div class="form-group">
-    														<label for="search" class="col-sm-2 control-label">Arama</label>
-    														<div class="col-sm-10">
-    															<input type="text" class="form-control" id="search">
-    														</div>
+    								</div>
+    								<div class="srch-wrap">
+    									<a href="#" id="srch" class="btn btn-default btn-search"><i class="fa fa-search"></i></a>
+    								</div>
+    								<div class="srchwrap">
+    									<div class="row">
+    										<div class="col-md-12">
+    											<form class="form-horizontal" role="form">
+    												<div class="form-group">
+    													<label for="search" class="col-sm-2 control-label">Arama</label>
+    													<div class="col-sm-10">
+    														<input type="text" class="form-control" id="search">
     													</div>
-    												</form>
-    											</div>
+    												</div>
+    											</form>
     										</div>
     									</div>
     								</div>
     							</div>
     						</div>
+    					</div>
 
 
+    				</div>
+    			</div>
+    			<div class="dashed"></div>
+    		</div><!--Header -->
+    		<div class="main-nav"><!--end main-nav -->
+    			<div class="navbar navbar-default navbar-static-top">
+    				<div class="container">
+    					<div class="row">
+    						<div class="col-md-10">
+    							<div class="navbar-header">
+    								<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+    									<span class="icon-bar"></span>
+    									<span class="icon-bar"></span>
+    									<span class="icon-bar"></span>
+    								</button>
+    							</div>
+    							<div class="navbar-collapse collapse">
+    								<ul class="nav navbar-nav">
+    									<li><a href="index.php" class="active">Ana Sayfa</a><div class="curve"></div></li>
+
+    									<?php while ($menucek=$menusor->fetch(PDO::FETCH_ASSOC)) { ?> 
+    										<li>
+    											<a href="    											
+    											<?php 
+    											if (!empty($menucek["menu_url"])) {echo $menucek["menu_url"]; }
+    											else{echo "sayfa-".$menucek["menu_seourl"]; }
+    											?>
+    											">
+    											<?php echo $menucek["menu_ad"]; ?></a></li>
+    										<?php } ?>
+
+
+    									</ul>
+    								</div>
+    							</div>
+    							<div class="col-md-2 machart">
+    								<button id="popcart" class="btn btn-default btn-chart btn-sm "><span class="mychart">Cart</span>|<span class="allprice">$0.00</span></button>
+    								<div class="popcart">
+    									<table class="table table-condensed popcart-inner">
+    										<tbody>
+    											<tr>
+    												<td>
+    													<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
+    												</td>
+    												<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
+    												<td>1X</td>
+    												<td>$138.80</td>
+    												<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
+    											</tr>
+    											<tr>
+    												<td>
+    													<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
+    												</td>
+    												<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
+    												<td>1X</td>
+    												<td>$138.80</td>
+    												<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
+    											</tr>
+    											<tr>
+    												<td>
+    													<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
+    												</td>
+    												<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
+    												<td>1X</td>
+    												<td>$138.80</td>
+    												<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
+    											</tr>
+    										</tbody>
+    									</table>
+    									<span class="sub-tot">Sub-Total : <span>$277.60</span> | <span>Vat (17.5%)</span> : $36.00 </span>
+    									<br>
+    									<div class="btn-popcart">
+    										<a href="checkout.htm" class="btn btn-default btn-red btn-sm">Checkout</a>
+    										<a href="cart.htm" class="btn btn-default btn-red btn-sm">More</a>
+    									</div>
+    									<div class="popcart-tot">
+    										<p>
+    											Total<br>
+    											<span>$313.60</span>
+    										</p>
+    									</div>
+    									<div class="clearfix"></div>
+    								</div>
+    							</div>
+    							<?php if (isset($_SESSION['kullanici_mail'])) {?>
+    								<ul class="small-menu"><!--small-nav -->
+    									<li><a href="" class="myacc">Hesabım</a></li>
+    									<li><a href="" class="myshop">Spetim</a></li>
+    									<li><a href="logout.php" class="mycheck">Çıkış Yap</a></li>
+    								</ul><!--small-nav -->
+    							<?php } ?>  
+    						</div>
     					</div>
     				</div>
-    				<div class="dashed"></div>
-    			</div><!--Header -->
-    			<div class="main-nav"><!--end main-nav -->
-    				<div class="navbar navbar-default navbar-static-top">
-    					<div class="container">
-    						<div class="row">
-    							<div class="col-md-10">
-    								<div class="navbar-header">
-    									<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-    										<span class="icon-bar"></span>
-    										<span class="icon-bar"></span>
-    										<span class="icon-bar"></span>
-    									</button>
-    								</div>
-    								<div class="navbar-collapse collapse">
-    									<ul class="nav navbar-nav">
-    										<li><a href="index.php" class="active">Ana Sayfa</a><div class="curve"></div></li>
-
-
-    										<?php while ($menucek=$menusor->fetch(PDO::FETCH_ASSOC)) { ?> 
-    											<li><a href="    											
-    												<?php 
-    												if (!empty($menucek["menu_url"])) {
-    													echo $menucek["menu_url"]; 
-    												}
-    												else{
-    													echo "sayfa-".$menucek["menu_seourl"]; 
-    												}
-
-
-
-    												?>
-
-
-
-
-    												"><?php echo $menucek["menu_ad"]; ?></a></li>
-    											<?php } ?>
-
-
-    										</ul>
-    									</div>
-    								</div>
-    								<div class="col-md-2 machart">
-    									<button id="popcart" class="btn btn-default btn-chart btn-sm "><span class="mychart">Cart</span>|<span class="allprice">$0.00</span></button>
-    									<div class="popcart">
-    										<table class="table table-condensed popcart-inner">
-    											<tbody>
-    												<tr>
-    													<td>
-    														<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
-    													</td>
-    													<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
-    													<td>1X</td>
-    													<td>$138.80</td>
-    													<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
-    												</tr>
-    												<tr>
-    													<td>
-    														<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
-    													</td>
-    													<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
-    													<td>1X</td>
-    													<td>$138.80</td>
-    													<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
-    												</tr>
-    												<tr>
-    													<td>
-    														<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
-    													</td>
-    													<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
-    													<td>1X</td>
-    													<td>$138.80</td>
-    													<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
-    												</tr>
-    											</tbody>
-    										</table>
-    										<span class="sub-tot">Sub-Total : <span>$277.60</span> | <span>Vat (17.5%)</span> : $36.00 </span>
-    										<br>
-    										<div class="btn-popcart">
-    											<a href="checkout.htm" class="btn btn-default btn-red btn-sm">Checkout</a>
-    											<a href="cart.htm" class="btn btn-default btn-red btn-sm">More</a>
-    										</div>
-    										<div class="popcart-tot">
-    											<p>
-    												Total<br>
-    												<span>$313.60</span>
-    											</p>
-    										</div>
-    										<div class="clearfix"></div>
-    									</div>
-    								</div>
-    								<ul class="small-menu"><!--small-nav -->
-    									<li><a href="" class="myacc">My Account</a></li>
-    									<li><a href="" class="myshop">Shopping Chart</a></li>
-    									<li><a href="" class="mycheck">Checkout</a></li>
-    								</ul><!--small-nav -->
-    							</div>
-    						</div>
-    					</div>
 	</div><!--end main-nav -->
