@@ -5,50 +5,78 @@ session_start();
 include 'baglan.php';
 include '../production/fonksiyon.php';
 
-if (isset($_POST['admingiris'])) {
 
+if (isset($_POST['kullanicikaydet'])) {
+	$kullanici_adsoyad=htmlspecialchars($_POST['kullanici_adsoyad']);
+	$kullanici_mail=htmlspecialchars($_POST['kullanici_mail']);
+	$kullanici_passwordone=($_POST['kullanici_passwordone']);
+	$kullanici_passwordtwo=($_POST['kullanici_passwordtwo']);
+	//echo $kullanici_adsoyad.$kullanici_mail.$kullanici_passwordone.$kullanici_passwordtwo;
+
+	if ($kullanici_passwordone==$kullanici_passwordtwo) {
+		if ($kullanici_passwordone>=6) {
+
+			$kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
+			$kullanicisor->execute(array('mail' => $_POST['kullanici_mail']));
+			$say=$kullanicisor->rowCount();
+
+			if ($say==0) {
+				$kullanici_password=md5($kullanici_passwordone);
+				$userekle=$db->prepare("INSERT INTO kullanici SET
+					kullanici_adsoyad=:kullanici_adsoyad,
+					kullanici_mail=:kullanici_mail,
+					kullanici_password=:kullanici_password
+					");
+				$insert=$userekle->execute(array(
+					'kullanici_adsoyad' => $kullanici_adsoyad,
+					'kullanici_mail' => $kullanici_mail,
+					'kullanici_password' => $kullanici_password
+				));
+				if ($insert) {
+					$_SESSION['kullanici_mail']=$kullanici_mail;
+					Header("Location:../../index.php");
+				} else {
+					Header("Location:../../register.php?durum=basarisiz");
+				}
+			} else { header("Location:../../register.php?durum=mukerrerkayit");}	
+		} else { header("Location:../../register.php?durum=eksiksifre");}
+	} else  {	header("Location:../../register.php?durum=farklisifre"); }
+}
+
+
+if (isset($_POST['admingiris'])) {
 	$kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail and kullanici_password=:password and kullanici_yetki=:yetki");
 	$kullanicisor->execute(array(
 		'mail' => $_POST['kullanici_mail'],
 		'password' => md5($_POST['kullanici_password']),
 		'yetki' => 5
 	));
-
 	$say=$kullanicisor->rowCount();
-
-	if ($say==1) {
-		
+	if ($say==1) {		
 		$_SESSION['kullanici_mail']=$_POST['kullanici_mail'];
 		header("Location:../production/index.php");
 		exit;
-
-
-
 	} else {
-
 		header("Location:../production/login.php?durum=no");
 		exit;
-	}
-	
+	}	
 
 }
 
 
 if (isset($_POST['logoduzenle'])) {
 	$uploads_dir = '../../dimg';
-
 	@$tmp_name = $_FILES['ayar_logo']["tmp_name"];
 	@$name = $_FILES['ayar_logo']["name"];
-
 	$time=date("dmyHis");
 	$resimgyol=substr($uploads_dir, 6)."/".$time.$name;
-
 	@move_uploaded_file($tmp_name, "$uploads_dir/$time$name");
+
 	$duzenle=$db->prepare("UPDATE ayar SET
 		ayar_logo=:logo
 		WHERE ayar_id=0");
-	$update=$duzenle->execute(array('logo' => $resimgyol ));
 
+	$update=$duzenle->execute(array('logo' => $resimgyol ));
 	if ($update) {
 		$resimsilunlink=$_POST['eski_yol'];
 		unlink("../../$resimsilunlink");
@@ -74,14 +102,9 @@ if (isset($_POST['genelayarkaydet'])&&($_POST['ayar_title']!=null)) {
 		'ayar_keywords' => $_POST['ayar_keywords'],
 		'ayar_author' => $_POST['ayar_author']
 	));
-
-
 	if ($update) {
-
 		header("Location:../production/genel-ayar.php?durum=ok");
-
 	} else {
-
 		header("Location:../production/genel-ayar.php?durum=no");
 	}
 	

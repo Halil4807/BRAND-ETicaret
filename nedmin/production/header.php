@@ -11,9 +11,10 @@ $ayarsor->execute(array(
 $ayarcek=$ayarsor->fetch(PDO::FETCH_ASSOC);
 
  
- $kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
+ $kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail and kullanici_yetki=:yetki");
 $kullanicisor->execute(array(
-  'mail'=>$_SESSION['kullanici_mail']
+  'mail'=>$_SESSION['kullanici_mail'],
+    'yetki' => 5
 ));
 $say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
