@@ -41,14 +41,13 @@ if (isset($_POST['logoduzenle'])) {
 	@$name = $_FILES['ayar_logo']["name"];
 
 	$time=date("dmyHis");
-	$refimgyol=substr($uploads_dir, 6)."/".$time.$name;
+	$resimgyol=substr($uploads_dir, 6)."/".$time.$name;
 
 	@move_uploaded_file($tmp_name, "$uploads_dir/$time$name");
-	
 	$duzenle=$db->prepare("UPDATE ayar SET
 		ayar_logo=:logo
 		WHERE ayar_id=0");
-	$update=$duzenle->execute(array('logo' => $refimgyol ));
+	$update=$duzenle->execute(array('logo' => $resimgyol ));
 
 	if ($update) {
 		$resimsilunlink=$_POST['eski_yol'];
@@ -316,10 +315,7 @@ $ad=$_POST['menu_ad'];
 }
 
 if (isset($_POST['menukaydet'])) {
-
-
 	$menu_seourl=SEOLink($_POST['menu_ad']);
-
 	$ayarekle=$db->prepare("INSERT INTO menu SET
 		menu_ad=:menu_ad,
 		menu_detay=:menu_detay,
@@ -329,7 +325,6 @@ if (isset($_POST['menukaydet'])) {
 		menu_seourl=:menu_seourl,
 		menu_durum=:menu_durum
 		");
-
 	$insert=$ayarekle->execute(array(
 		'menu_ad' => $_POST['menu_ad'],
 		'menu_detay' => $_POST['menu_detay'],
@@ -339,21 +334,55 @@ if (isset($_POST['menukaydet'])) {
 		'menu_seourl' => $menu_seourl,
 		'menu_durum' => $_POST['menu_durum']
 		));
-
-
 	if ($insert) {
 		
 		Header("Location:../production/menu.php?durum=ok");
-
 	} else {
 
 		Header("Location:../production/menu.php?durum=no");
 	}
-
 }
+
+
+
+if (isset($_POST['sliderkaydet'])) {
+
+	$uploads_dir = '../../dimg/slider';
+	@$tmp_name = $_FILES['slider_resim']["tmp_name"];
+	@$name = $_FILES['slider_resim']["name"];
+	$time=date("dmyHis");
+	$resimgyol=substr($uploads_dir, 6)."/".$time.$name;
+	@move_uploaded_file($tmp_name, "$uploads_dir/$time$name");
+
+	$sliderekle=$db->prepare("INSERT INTO slider SET
+		slider_resimyol=:slider_resimyol,
+		slider_ad=:slider_ad,
+		slider_link=:slider_link,
+		slider_sira=:slider_sira,
+		slider_durum=:slider_durum
+		");
+	$insert=$sliderekle->execute(array(
+		'slider_resimyol' => $resimgyol,
+		'slider_ad' => $_POST['slider_ad'],
+		'slider_link' => $_POST['slider_link'],
+		'slider_sira' => $_POST['slider_sira'],
+		'slider_durum' => $_POST['slider_durum']
+		));
+	if ($insert) {
+		
+		Header("Location:../production/slider.php?durum=ok");
+	} else {
+
+		Header("Location:../production/slider.php?durum=no");
+	}
+}
+
 
 if (isset($_POST['gomenu'])) {
 	Header("Location:../production/menu.php");
+}
+if (isset($_POST['goslider'])) {
+	Header("Location:../production/slider.php");
 }
 
 if ($_GET['kullanicisil']=="ok") {
@@ -371,5 +400,12 @@ if ($_GET['menusil']=="ok") {
 	if ($kontrol) {Header("Location:../production/menu.php?sil=ok");} 
 	else {Header("Location:../production/menu.php?sil=no");}
 }
-
+if ($_GET['slidersil']=="ok") {
+	$slider_id=$_GET['slider_id'];
+	$sil=$db->prepare("DELETE FROM slider where slider_id=:id");
+	$kontrol=$sil->execute(array('id' => $slider_id));
+	if ($kontrol) {Header("Location:../production/slider.php?sil=ok");} 
+	else {Header("Location:../production/slider.php?sil=no");}
+}
+//echo "burdasın";exit;
 ?>

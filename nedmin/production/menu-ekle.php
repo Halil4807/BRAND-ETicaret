@@ -11,7 +11,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Kullanıcı Düzenleme<small>
+            <h2>Menü Ekleme<small>
 
                       <!-- 
                         isset($_GET['durum'])&& eklenme sebebi aşağıdaki hatayı vermemesi
