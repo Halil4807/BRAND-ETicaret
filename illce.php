@@ -31,6 +31,13 @@ $ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC);
             });
         });
 
+        $(function secim(){
+                var slug = $("#il-select option:selected").attr("slug");
+                if(slug){
+                    $("#ilce-select option[il-slug='"+slug+"']").show();
+                }
+        });
+
     </script>
 </head>
 
@@ -38,7 +45,7 @@ $ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC);
     <select id="il-select">
         <option selected>İl Seçiniz</option>
         <?php while ($ilcek=$ilsor->fetch(PDO::FETCH_ASSOC)) { ?> 
-            <option value="<?php echo $ilcek["il_ad"]; ?>" slug="<?php echo $ilcek["il_id"]; ?>"><?php echo $ilcek["il_ad"]; ?></option>
+            <option <?php echo $ilcek["il_id"]=='7'?'selected=""':''; ?> value="<?php echo $ilcek["il_ad"]; ?>" slug="<?php echo $ilcek["il_id"]; ?>"><?php echo $ilcek["il_ad"]; ?></option>
         <?php } ?>
     </select>
 
