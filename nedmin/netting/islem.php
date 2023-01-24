@@ -73,7 +73,7 @@ if (isset($_POST['hesapduzenle'])) {
 						'kullanici_password' => $kullanici_password
 					));
 					if ($update) {
-						Header("Location:../../hesabim.php");
+						Header("Location:../../hesabim.php?durum=ok");
 					} else {
 						Header("Location:../../hesabim.php?durum=basarisiz");
 					}
@@ -101,7 +101,7 @@ if (isset($_POST['hesapduzenle'])) {
 				'kullanici_ilce' => $_POST['kullanici_ilce']
 			));
 			if ($update) {
-				Header("Location:../../hesabim.php");
+				Header("Location:../../hesabim.php?durum=ok");
 			} else {
 				Header("Location:../../hesabim.php?durum=basarisiz");
 			}

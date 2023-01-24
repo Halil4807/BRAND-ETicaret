@@ -49,6 +49,11 @@
 					<div class="alert alert-danger">
 						<strong>Hata!</strong> Kayıt Yapılamadı Sistem Yöneticisine Danışınız.
 					</div>
+				<?php } elseif (isset($_GET['durum'])&&$_GET['durum']=="ok") {?>
+
+					<div class="alert alert-success">
+						<strong>Güncelleme Başarılı!</strong> 
+					</div>
 				<?php } ?>
 				<input type="hidden" class="form-control" name="kullanici_id"  value="<?php echo $kullanicicek['kullanici_id']; ?>">
 				<?php $zaman=explode(" ", $kullanicicek['kullanici_zaman']) ?>
