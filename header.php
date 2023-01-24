@@ -208,8 +208,8 @@ if (isset($_SESSION['kullanici_mail'])) {
     							</div>
     							<?php if (isset($_SESSION['kullanici_mail'])) {?>
     								<ul class="small-menu"><!--small-nav -->
-    									<li><a href="" class="myacc">Hesabım</a></li>
-    									<li><a href="" class="myshop">Spetim</a></li>
+    									<li><a href="hesabim" class="myacc">Hesabım</a></li>
+    									<li><a href="sepetim" class="myshop">Spetim</a></li>
     									<li><a href="logout.php" class="mycheck">Çıkış Yap</a></li>
     								</ul><!--small-nav -->
     							<?php } ?>  

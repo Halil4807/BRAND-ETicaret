@@ -14,7 +14,7 @@ if (isset($_POST['kullanicikaydet'])) {
 	//echo $kullanici_adsoyad.$kullanici_mail.$kullanici_passwordone.$kullanici_passwordtwo;
 
 	if ($kullanici_passwordone==$kullanici_passwordtwo) {
-		if ($kullanici_passwordone>=6) {
+		if (strlen($kullanici_passwordone)>=6) {
 
 			$kullanicisor=$db->prepare("SELECT * FROM kullanici where kullanici_mail=:mail");
 			$kullanicisor->execute(array('mail' => $_POST['kullanici_mail']));
@@ -42,6 +42,73 @@ if (isset($_POST['kullanicikaydet'])) {
 		} else { header("Location:../../register.php?durum=eksiksifre");}
 	} else  {	header("Location:../../register.php?durum=farklisifre"); }
 }
+
+if (isset($_POST['hesapduzenle'])) {
+	$kullanici_adsoyad=htmlspecialchars($_POST['kullanici_adsoyad']);
+	$kullanici_passwordone=htmlspecialchars($_POST['kullanici_passwordone']);
+	$kullanici_passwordtwo=htmlspecialchars($_POST['kullanici_passwordtwo']);
+	//echo $kullanici_adsoyad.$kullanici_mail.$kullanici_passwordone.$kullanici_passwordtwo;
+
+	if (strlen($_POST['kullanici_passwordone'])!=0) {
+		if ($kullanici_passwordone==$kullanici_passwordtwo) {
+			if (strlen($kullanici_passwordone)>=6) {
+				if (strlen($_POST['kullanici_tc'])==11) {
+					$kullanici_password=md5($kullanici_passwordone);
+					$hesapduzenle=$db->prepare("UPDATE kullanici SET
+						kullanici_tc=:kullanici_tc,
+						kullanici_adsoyad=:kullanici_adsoyad,
+						kullanici_gsm=:kullanici_gsm,
+						kullanici_adres=:kullanici_adres,
+						kullanici_il=:kullanici_il,
+						kullanici_ilce=:kullanici_ilce,
+						kullanici_password=:kullanici_password
+						WHERE kullanici_id={$_POST['kullanici_id']}");
+					$update=$hesapduzenle->execute(array(
+						'kullanici_tc' => $_POST['kullanici_tc'],
+						'kullanici_adsoyad' => $kullanici_adsoyad,
+						'kullanici_gsm' => $_POST['kullanici_gsm'],
+						'kullanici_adres' => $_POST['kullanici_adres'],
+						'kullanici_il' => $_POST['kullanici_il'],
+						'kullanici_ilce' => $_POST['kullanici_ilce'],
+						'kullanici_password' => $kullanici_password
+					));
+					if ($update) {
+						Header("Location:../../hesabim.php");
+					} else {
+						Header("Location:../../hesabim.php?durum=basarisiz");
+					}
+				}else { header("Location:../../hesabim.php?durum=hatalitc");}
+				
+			} else { header("Location:../../hesabim.php?durum=eksiksifre");}
+		} else  {	header("Location:../../hesabim.php?durum=farklisifre"); }
+	}else
+	{
+		if (strlen($_POST['kullanici_tc'])==11) {
+			$hesapduzenle=$db->prepare("UPDATE kullanici SET
+				kullanici_tc=:kullanici_tc,
+				kullanici_adsoyad=:kullanici_adsoyad,
+				kullanici_gsm=:kullanici_gsm,
+				kullanici_adres=:kullanici_adres,
+				kullanici_il=:kullanici_il,
+				kullanici_ilce=:kullanici_ilce
+				WHERE kullanici_id={$_POST['kullanici_id']}");
+			$update=$hesapduzenle->execute(array(
+				'kullanici_tc' => $_POST['kullanici_tc'],
+				'kullanici_adsoyad' => $kullanici_adsoyad,
+				'kullanici_gsm' => $_POST['kullanici_gsm'],
+				'kullanici_adres' => $_POST['kullanici_adres'],
+				'kullanici_il' => $_POST['kullanici_il'],
+				'kullanici_ilce' => $_POST['kullanici_ilce']
+			));
+			if ($update) {
+				Header("Location:../../hesabim.php");
+			} else {
+				Header("Location:../../hesabim.php?durum=basarisiz");
+			}
+		}else { header("Location:../../hesabim.php?durum=hatalitc");}
+	}
+}
+
 
 
 if (isset($_POST['admingiris'])) {
