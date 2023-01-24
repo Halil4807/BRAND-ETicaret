@@ -107,7 +107,26 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 	<script type="text/javascript" src="js\jquery.ui.map.js"></script>
 	<script type="text/javascript" src="js\demo.js"></script>
-	
+
+	<script>
+	$(function(){
+		$("#ilce-select option").hide();
+		$("#il-select").change(function(){
+			$("#ilce-select option").hide();
+			var slug = $("#il-select option:selected").attr("slug");
+			if(slug){
+				$("#ilce-select option[il-slug='"+slug+"']").show();
+			}
+		});
+	});
+
+	$(function secim(){
+		var slug = $("#il-select option:selected").attr("slug");
+		if(slug){
+			$("#ilce-select option[il-slug='"+slug+"']").show();
+		}
+	});
+</script>
 	<!-- owl carousel -->
 	<script src="js\owl.carousel.min.js"></script>
 	

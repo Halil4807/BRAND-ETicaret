@@ -1,4 +1,16 @@
 ﻿<?php include 'header.php'; ?>
+<?php 
+
+$ilsor=$db->prepare("SELECT * FROM iller");
+$ilsor->execute(array());
+$ilcek=$ilsor->fetch(PDO::FETCH_ASSOC);
+
+$ilcesor=$db->prepare("SELECT * FROM ilceler");
+$ilcesor->execute(array());
+$ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC);
+
+?>
+
 
 <div class="container">
 	<div class="row">
@@ -19,9 +31,9 @@
 
 	<form action="nedmin/netting/islem.php" method="POST" class="form-horizontal checkout" role="form">
 		<div class="row">
-				<div class="title-bg">
-					<div class="title">Kullanıcı Bilgileri</div>
-				</div>
+			<div class="title-bg">
+				<div class="title">Kullanıcı Bilgileri</div>
+			</div>
 			<div class="col-md-9">
 
 				<?php 
@@ -98,19 +110,29 @@
 				<div class="form-group dob">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">İl <span class="required">*</span></label>
 					<div class="col-md-9 col-sm-9 col-xs-12">
-						<input type="text" class="form-control"  required="" name="kullanici_il" value="<?php echo $kullanicicek['kullanici_il']; ?>">
+						<select id="il-select" name="kullanici_il">
+							<option selected>İl Seçiniz</option>
+							<?php while ($ilcek=$ilsor->fetch(PDO::FETCH_ASSOC)) { ?> 
+								<option name="kullanici_il" <?php if($ilcek["il_ad"]==$kullanicicek['kullanici_il']){ echo "selected=\"\"";} ?> value="<?php echo $ilcek["il_ad"]; ?>" slug="<?php echo $ilcek["il_id"]; ?>"><?php echo $ilcek["il_ad"]; ?></option>
+							<?php } ?>
+						</select>
 					</div>
 				</div>
 				<div class="form-group dob">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">İlçe <span class="required">*</span></label>
 					<div class="col-md-9 col-sm-9 col-xs-12">
-						<input type="text" class="form-control"  required="" name="kullanici_ilce" value="<?php echo $kullanicicek['kullanici_ilce']; ?>">
+						<select id="ilce-select" name="kullanici_ilce">
+							<option selected>İlçe Seçiniz</option>
+							<?php while ($ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC)) { ?> 
+								<option name="kullanici_ilce" <?php if($ilcecek["ilce_ad"]==$kullanicicek['kullanici_ilce']){echo "selected=\"\"";} ?> value="<?php echo $ilcecek["ilce_ad"]; ?>" il-slug="<?php echo $ilcecek["il_id"]; ?>"><?php echo $ilcecek["ilce_ad"]; ?></option>
+							<?php } ?>
+						</select>
 					</div>
 				</div>
 
 				<div class="form-group dob">
-						<label class="col-md-6 col-sm-6 col-xs-12" for="first-name">Şifre <span class="required">*</span></label>
-						<label class="col-md-6 col-sm-6 col-xs-12" for="first-name">Şifre Tekrar <span class="required">*</span></label>
+					<label class="col-md-6 col-sm-6 col-xs-12" for="first-name">Şifre <span class="required">*</span></label>
+					<label class="col-md-6 col-sm-6 col-xs-12" for="first-name">Şifre Tekrar <span class="required">*</span></label>
 				</div>
 				<div class="form-group dob">
 					<div class="col-md-6 col-sm-6 col-xs-12">
