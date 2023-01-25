@@ -110,7 +110,7 @@ $ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC);
 				<div class="form-group dob">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">İl <span class="required">*</span></label>
 					<div class="col-md-9 col-sm-9 col-xs-12">
-						<select id="il-select" name="kullanici_il">
+						<select class="form-control" id="il-select" name="kullanici_il">
 							<option selected>İl Seçiniz</option>
 							<?php while ($ilcek=$ilsor->fetch(PDO::FETCH_ASSOC)) { ?> 
 								<option name="kullanici_il" <?php if($ilcek["il_ad"]==$kullanicicek['kullanici_il']){ echo "selected=\"\"";} ?> value="<?php echo $ilcek["il_ad"]; ?>" slug="<?php echo $ilcek["il_id"]; ?>"><?php echo $ilcek["il_ad"]; ?></option>
@@ -121,7 +121,7 @@ $ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC);
 				<div class="form-group dob">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">İlçe <span class="required">*</span></label>
 					<div class="col-md-9 col-sm-9 col-xs-12">
-						<select id="ilce-select" name="kullanici_ilce">
+						<select class="form-control" id="ilce-select" name="kullanici_ilce">
 							<option selected>İlçe Seçiniz</option>
 							<?php while ($ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC)) { ?> 
 								<option name="kullanici_ilce" <?php if($ilcecek["ilce_ad"]==$kullanicicek['kullanici_ilce']){echo "selected=\"\"";} ?> value="<?php echo $ilcecek["ilce_ad"]; ?>" il-slug="<?php echo $ilcecek["il_id"]; ?>"><?php echo $ilcecek["ilce_ad"]; ?></option>
@@ -145,7 +145,9 @@ $ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC);
 
 
 
-				<button type="submit" name="hesapduzenle" class="btn btn-default btn-red">Kayıt Ol</button>
+	
+				<button type="submit" name="hesapduzenle" class="btn btn-default btn-success">Güncelle</button>
+
 			</div>
 			<div class="col-md-3">
 			</div>
