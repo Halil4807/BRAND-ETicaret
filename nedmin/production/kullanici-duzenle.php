@@ -128,6 +128,7 @@ $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
                             <div class="form-group">
                               <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                 <button type="submit" name="kullaniciduzenle" class="btn btn-success">Güncelle</button>
+                                <button type="button" name="gokategori" class="btn btn-secondary" onClick="geri()">Geri</button>
                               </div>
                             </div>
 

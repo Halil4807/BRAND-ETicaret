@@ -1,15 +1,15 @@
 <?php include 'header.php'; ?>
 
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-           
-            <div class="clearfix"></div>
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>API Ayarlar<small>
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+   
+    <div class="clearfix"></div>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>API Ayarlar<small>
 
 
                       <!-- 
@@ -20,14 +20,14 @@
                       <?php 
                       if(isset($_GET['durum'])&&$_GET['durum']=="ok"){?>
                         <b style="color: green;">Güncelleme başarılı</b>
-                      <?php  
-                    }
+                        <?php  
+                      }
                       elseif(isset($_GET['durum'])&&$_GET['durum']=="no"){
                         ?>
                         <b style="color: red;">Güncelleme başarısız</b>
-                      <?php 
+                        <?php 
                       } 
-                        ?>
+                      ?>
 
                     </small></h2>
                     <ul class="nav navbar-right panel_toolbox">
@@ -52,48 +52,49 @@
                       <!-- 
                               / Kök dizine çık
                             ../ Bir üst dizine çık 
-                      -->
-                    <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                          -->
+                          <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Analystic Kodu <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" name="ayar_analystic" value="<?php echo $ayarcek['ayar_analystic'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Analystic Kodu <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="first-name" name="ayar_analystic" value="<?php echo $ayarcek['ayar_analystic'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                              </div>
+                            </div>
 
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Maps API <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" name="ayar_maps" value="<?php echo $ayarcek['ayar_maps'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Maps API <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="first-name" name="ayar_maps" value="<?php echo $ayarcek['ayar_maps'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                              </div>
+                            </div>
 
-              <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Zopim Apı <span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                  <input type="text" id="first-name" name="ayar_zopim" value="<?php echo $ayarcek['ayar_zopim'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-              </div>
+                            <div class="form-group">
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Zopim Apı <span class="required">*</span>
+                              </label>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="first-name" name="ayar_zopim" value="<?php echo $ayarcek['ayar_zopim'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                              </div>
+                            </div>
 
-                      
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" name="apiayarkaydet" class="btn btn-success">Güncelle</button>
+                            
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                              <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="submit" name="apiayarkaydet" class="btn btn-success">Güncelle</button>
+                                <button type="button" name="gokategori" class="btn btn-secondary" onClick="geri()">Geri</button>
+                              </div>
+                            </div>
+
+                          </form>
                         </div>
                       </div>
-
-                    </form>
+                    </div>
                   </div>
+
                 </div>
               </div>
-            </div>
-
-          </div>
-        </div>
-        <!-- /page content -->
-<?php include 'footer.php'; ?>
+              <!-- /page content -->
+              <?php include 'footer.php'; ?>

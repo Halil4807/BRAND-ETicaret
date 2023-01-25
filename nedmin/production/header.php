@@ -57,6 +57,7 @@ if ($say==0) {
     <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
+    <script type="text/javascript">    function geri(){history.back()}  </script>
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -106,6 +107,7 @@ if ($say==0) {
                   <li><a href="hakkimizda.php"><i class="fa fa-info"></i> Hakkimizda </span></a>
                   <li><a href="kullanici.php"><i class="fa fa-user"></i> Kullanıcılar </span></a>
                   <li><a href="menu.php"><i class="fa fa-list"></i> Menüler </span></a>
+                  <li><a href="kategori.php"><i class="fa fa-list"></i> Kategoriler </span></a>
                   <li><a href="slider.php"><i class="fa fa-image"></i> Slider </span></a>
                   
                 </ul>
@@ -113,7 +115,7 @@ if ($say==0) {
             </div>
             <!-- /sidebar menu -->
 
-            <!-- /menu footer buttons -->
+            <!-- /menu footer buttons 
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -128,7 +130,7 @@ if ($say==0) {
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
-            <!-- /menu footer buttons -->
+             /menu footer buttons -->
           </div>
         </div>
 

@@ -1,16 +1,13 @@
 <?php include 'header.php'; 
 
-$hakkimizdasor=$db->prepare("SELECT * FROM hakkimizda where hakkimizda_id=:id");
-$hakkimizdasor->execute(array(
-  'id'=>0
+
+$kategorisor=$db->prepare("SELECT * FROM kategori where kategori_id=:id");
+$kategorisor->execute(array(
+  'id'=>$_GET['kategori_id']
 ));
-$hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
+$say=$kategorisor->rowCount();
+$kategoricek=$kategorisor->fetch(PDO::FETCH_ASSOC);
 ?>
-
-<head>
-  <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
-
-</head>
 <!-- page content -->
 <div class="right_col" role="main">
   <div class="">
@@ -20,7 +17,7 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Hakkımızda Ayarlar<small>
+            <h2>Kullanıcı Düzenleme<small>
 
                       <!-- 
                         isset($_GET['durum'])&& eklenme sebebi aşağıdaki hatayı vermemesi
@@ -45,7 +42,7 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
                       </li>
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
+                        <ul class="dropdown-kategori" role="kategori">
                           <li><a href="#">Settings 1</a>
                           </li>
                           <li><a href="#">Settings 2</a>
@@ -64,87 +61,73 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
                             ../ Bir üst dizine çık 
                           -->
                           <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+                            <input type="hidden" name="kategori_id" value="<?php echo $kategoricek['kategori_id']; ?>">
+                            
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hakkımızda Başlığı <span class="required">*</span>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">kategori Linki <span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" name="hakkimizda_baslik" value="<?php echo $hakkimizdacek['hakkimizda_baslik'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                              </div>
-                            </div>
-
-                            <!-- Ck Editör Başlangıç -->
-
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">İçerik <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                <textarea  class="ckeditor" id="editor1" name="hakkimizda_icerik"><?php echo $hakkimizdacek['hakkimizda_icerik']; ?></textarea>
-                              </div>
-                            </div>
-
-                            <script type="text/javascript">
-
-                             CKEDITOR.replace( 'editor1',
-
-                             {
-
-                              filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
-
-                              filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
-
-                              filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
-
-                              filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-
-                              filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-
-                              filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
-
-                              forcePasteAsPlainText: true
-
-                            } 
-
-                            );
-
-                          </script>
-
-                          <!-- Ck Editör Bitiş -->
-
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hakkımızda Video Linki <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="first-name" name="hakkimizda_video" value="<?php echo $hakkimizdacek['hakkimizda_video'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="first-name" disabled=""  value="<?php 
+                                if (!empty($kategoricek["kategori_url"])) {
+                                  echo $ayarcek["ayar_url"].$kategoricek['kategori_url'];
+                                }
+                                else{echo $ayarcek["ayar_url"]."sayfa-".$kategoricek["kategori_seourl"];}
+                              ?>" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Vizyon <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">kategori Sıra <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="first-name" name="hakkimizda_vizyon" value="<?php echo $hakkimizdacek['hakkimizda_vizyon'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" id="first-name" name="kategori_sira" value="<?php echo $kategoricek['kategori_sira']; ?>" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Adı <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="first-name" name="kategori_ad" value="<?php echo $kategoricek['kategori_ad']; ?>" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Misyon <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Üst Kategori <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="first-name" name="hakkimizda_misyon" value="<?php echo $hakkimizdacek['hakkimizda_misyon'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                              <input type="text" id="first-name" name="kategori_ust" value="<?php echo $kategoricek['kategori_ust'] ?>" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori SeoURL <span class="">*</span></label>
+                            
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="first-name" name="kategori_url" value="<?php echo $kategoricek['kategori_seourl'] ?>"  class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori Durum <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select class="form-control" name="kategori_durum" required>
+                                <option value="1" <?php echo $kategoricek['kategori_durum']=='1'?'selected=""':''; ?>>Aktif</option>
+                                <option value="0" <?php if($kategoricek['kategori_durum']=='0') {echo 'selected=""';} ?>>Pasif</option>
+                              </select>
+                            </div>
+                          </div>
+
 
                           <div class="ln_solid"></div>
                           <div class="form-group">
                             <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                              <button type="submit" name="hakkimizdakaydet" class="btn btn-success">Güncelle</button>
+                              <button type="submit" name="kategoriduzenle" class="btn btn-success">Güncelle</button>
                               <button type="button" name="gokategori" class="btn btn-secondary" onClick="geri()">Geri</button>
                             </div>
                           </div>
 
                         </form>
+
                       </div>
                     </div>
                   </div>

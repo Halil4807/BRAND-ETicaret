@@ -82,22 +82,22 @@
                               </select>
                             </div>
                           </div>
-                        <div class="ln_solid"></div>
-                        <div class="form-group">
-                          <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <button type="submit" name="sliderkaydet" class="btn btn-success">Kaydet</button>
-                            <!-- <button type="submit" name="goslider" class="btn btn-secondary">Geri</button> -->
+                          <div class="ln_solid"></div>
+                          <div class="form-group">
+                            <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                              <button type="submit" name="sliderkaydet" class="btn btn-success">Kaydet</button>
+                              <button type="button" name="gokategori" class="btn btn-secondary" onClick="geri()">Geri</button>
+                            </div>
                           </div>
-                        </div>
 
-                      </form>
+                        </form>
 
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
+              </div>
             </div>
-          </div>
-          <!-- /page content -->
-          <?php include 'footer.php'; ?>
+            <!-- /page content -->
+            <?php include 'footer.php'; ?>

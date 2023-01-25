@@ -72,106 +72,106 @@ $menucek=$menusor->fetch(PDO::FETCH_ASSOC);
                                   echo $ayarcek["ayar_url"].$menucek['menu_url'];
                                 }
                                 else{echo $ayarcek["ayar_url"]."sayfa-".$menucek["menu_seourl"];}
-                                ?>" class="form-control col-md-7 col-xs-12">
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menu Sıra <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" name="menu_sira" value="<?php echo $menucek['menu_sira']; ?>" required="required" class="form-control col-md-7 col-xs-12">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü Adı <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" name="menu_ad" value="<?php echo $menucek['menu_ad']; ?>" required="required" class="form-control col-md-7 col-xs-12">
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Üst Menü <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" name="menu_ust" value="<?php echo $menucek['menu_ust'] ?>" required="required" class="form-control col-md-7 col-xs-12">
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü URL <span class="">*</span></label>
-                              
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" name="menu_url" value="<?php echo $menucek['menu_url'] ?>"  class="form-control col-md-7 col-xs-12">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü Durum <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control" name="menu_durum" required>
-                                  <option value="1" <?php echo $menucek['menu_durum']=='1'?'selected=""':''; ?>>Aktif</option>
-                                  <option value="0" <?php if($menucek['menu_durum']=='0') {echo 'selected=""';} ?>>Pasif</option>
-                                </select>
-                              </div>
-                            </div>
-                            <!-- Ck Editör Başlangıç -->
-
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü Detayı <span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-
-                                <textarea  class="ckeditor" id="editor1" name="menu_detay"><?php echo $menucek['menu_detay']; ?></textarea>
-                              </div>
-                            </div>
-
-                            <script type="text/javascript">
-
-                             CKEDITOR.replace( 'editor1',
-
-                             {
-
-                              filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
-
-                              filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
-
-                              filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
-
-                              filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-
-                              filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-
-                              filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
-
-                              forcePasteAsPlainText: true
-
-                            } 
-
-                            );
-
-                          </script>
-
-                          <!-- Ck Editör Bitiş -->
-
-
-                          <div class="ln_solid"></div>
-                          <div class="form-group">
-                            <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                              <button type="submit" name="menuduzenle" class="btn btn-success">Güncelle</button>
-                              <button type="submit" name="gomenu" class="btn btn-secondary">Geri</button>
+                              ?>" class="form-control col-md-7 col-xs-12">
                             </div>
                           </div>
 
-                        </form>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menu Sıra <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="first-name" name="menu_sira" value="<?php echo $menucek['menu_sira']; ?>" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü Adı <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="first-name" name="menu_ad" value="<?php echo $menucek['menu_ad']; ?>" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
 
-                      </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Üst Menü <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="first-name" name="menu_ust" value="<?php echo $menucek['menu_ust'] ?>" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü URL <span class="">*</span></label>
+                            
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="text" id="first-name" name="menu_url" value="<?php echo $menucek['menu_url'] ?>"  class="form-control col-md-7 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü Durum <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select class="form-control" name="menu_durum" required>
+                                <option value="1" <?php echo $menucek['menu_durum']=='1'?'selected=""':''; ?>>Aktif</option>
+                                <option value="0" <?php if($menucek['menu_durum']=='0') {echo 'selected=""';} ?>>Pasif</option>
+                              </select>
+                            </div>
+                          </div>
+                          <!-- Ck Editör Başlangıç -->
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü Detayı <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+
+                              <textarea  class="ckeditor" id="editor1" name="menu_detay"><?php echo $menucek['menu_detay']; ?></textarea>
+                            </div>
+                          </div>
+
+                          <script type="text/javascript">
+
+                           CKEDITOR.replace( 'editor1',
+
+                           {
+
+                            filebrowserBrowseUrl : 'ckfinder/ckfinder.html',
+
+                            filebrowserImageBrowseUrl : 'ckfinder/ckfinder.html?type=Images',
+
+                            filebrowserFlashBrowseUrl : 'ckfinder/ckfinder.html?type=Flash',
+
+                            filebrowserUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+
+                            filebrowserImageUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+
+                            filebrowserFlashUploadUrl : 'ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash',
+
+                            forcePasteAsPlainText: true
+
+                          } 
+
+                          );
+
+                        </script>
+
+                        <!-- Ck Editör Bitiş -->
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                          <div align="center" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button type="submit" name="menuduzenle" class="btn btn-success">Güncelle</button>
+                            <button type="button" name="gokategori" class="btn btn-secondary" onClick="geri()">Geri</button>
+                          </div>
+                        </div>
+
+                      </form>
+
                     </div>
                   </div>
                 </div>
-
               </div>
+
             </div>
-            <!-- /page content -->
-            <?php include 'footer.php'; ?>
+          </div>
+          <!-- /page content -->
+          <?php include 'footer.php'; ?>
