@@ -23,6 +23,7 @@ if (isset($_SESSION['kullanici_mail'])) {
 }
 
 $kategoricek=$db->query("SELECT * FROM kategori")->fetchAll(PDO::FETCH_ASSOC);
+$ilcek2=$db->query("SELECT * FROM iller")->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 

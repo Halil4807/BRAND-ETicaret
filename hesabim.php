@@ -111,13 +111,22 @@ $ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC);
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">İl <span class="required">*</span></label>
 					<div class="col-md-9 col-sm-9 col-xs-12">
 						<select class="form-control" id="il-select" name="kullanici_il">
-							<option selected>İl Seçiniz</option>
-							<?php while ($ilcek=$ilsor->fetch(PDO::FETCH_ASSOC)) { ?> 
-								<option name="kullanici_il" <?php if($ilcek["il_ad"]==$kullanicicek['kullanici_il']){ echo "selected=\"\"";} ?> value="<?php echo $ilcek["il_ad"]; ?>" slug="<?php echo $ilcek["il_id"]; ?>"><?php echo $ilcek["il_ad"]; ?></option>
-							<?php } ?>
+							
+							<option value="0" selected>-İl Seçiniz-</option>
+							<?php foreach ($ilcek2 as $key => $value) {
+								if($value["il_ad"]==$kullanicicek['kullanici_il']){
+									echo '<option  name="kullanici_il" selected="" slug="'.$value['il_id'].'">'.$value['il_ad'].'</option>';
+								}
+								else
+								{
+									echo '<option  name="kullanici_il" slug="'.$value['il_id'].'">'.$value['il_ad'].'</option>';
+								}
+
+							} ?>
 						</select>
 					</div>
 				</div>
+
 				<div class="form-group dob">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">İlçe <span class="required">*</span></label>
 					<div class="col-md-9 col-sm-9 col-xs-12">
@@ -145,7 +154,7 @@ $ilcecek=$ilcesor->fetch(PDO::FETCH_ASSOC);
 
 
 
-	
+
 				<button type="submit" name="hesapduzenle" class="btn btn-default btn-success">Güncelle</button>
 
 			</div>

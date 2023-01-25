@@ -6,9 +6,8 @@
 	<div class="categorybox">
 		<ul>
 			<?php foreach ($kategoricek as $key => $value) {
-				echo "<li><a href=\"".$value["kategori_seourl"]."\">".$value["kategori_ad"]."</a></li>";
+				echo "<li><a href=\"kategori-".$value["kategori_seourl"]."\">".$value["kategori_ad"]."</a></li>";
 			} ?>
-			<li><a href="category.htm">Women Accessories</a></li>
 		</ul>
 	</div>
 	<div class="ads"></div>

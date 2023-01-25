@@ -109,24 +109,24 @@
 	<script type="text/javascript" src="js\demo.js"></script>
 
 	<script>
-	$(function(){
-		$("#ilce-select option").hide();
-		$("#il-select").change(function(){
+		$(function(){
 			$("#ilce-select option").hide();
+			$("#il-select").change(function(){
+				$("#ilce-select option").hide();
+				var slug = $("#il-select option:selected").attr("slug");
+				if(slug){
+					$("#ilce-select option[il-slug='"+slug+"']").show();
+				}
+			});
+		});
+
+		$(function secim(){
 			var slug = $("#il-select option:selected").attr("slug");
 			if(slug){
 				$("#ilce-select option[il-slug='"+slug+"']").show();
 			}
 		});
-	});
-
-	$(function secim(){
-		var slug = $("#il-select option:selected").attr("slug");
-		if(slug){
-			$("#ilce-select option[il-slug='"+slug+"']").show();
-		}
-	});
-</script>
+	</script>
 	<!-- owl carousel -->
 	<script src="js\owl.carousel.min.js"></script>
 	
@@ -147,11 +147,11 @@
 </html>
 
 <?php 
-if ($_GET['durum']=="no") {
+if (isset($_GET['durum'])&&$_GET['durum']=="no") {
 	$message = "Giriş işlemi başarısız olmuştur.";
 	echo "<script type='text/javascript'>alert('$message');</script>"; 
 }
-elseif ($_GET['durum']=="exit")
+elseif (isset($_GET['durum'])&&$_GET['durum']=="exit")
 {
 	$message = "Başarıyla çıkış yaptınız.";
 	echo "<script type='text/javascript'>alert('$message');</script>"; 
