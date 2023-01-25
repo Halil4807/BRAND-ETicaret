@@ -630,30 +630,37 @@ if ($_GET['kullanicisil']=="ok") {
 	$kullanici_id=$_GET['kullanici_id'];
 	$sil=$db->prepare("DELETE FROM kullanici where kullanici_id=:id");
 	$kontrol=$sil->execute(array('id' => $kullanici_id));
-	if ($kontrol) {Header("Location:../production/kullanici.php?sil=ok");} 
-	else {Header("Location:../production/kullanici.php?sil=no");}
+	if ($kontrol) {Header("Location:../production/kullanici.php?durum=ok");} 
+	else {Header("Location:../production/kullanici.php?durum=no");}
 }
 
 if ($_GET['menusil']=="ok") {
 	$menu_id=$_GET['menu_id'];
 	$sil=$db->prepare("DELETE FROM menu where menu_id=:id");
 	$kontrol=$sil->execute(array('id' => $menu_id));
-	if ($kontrol) {Header("Location:../production/menu.php?sil=ok");} 
-	else {Header("Location:../production/menu.php?sil=no");}
+	if ($kontrol) {Header("Location:../production/menu.php?durum=ok");} 
+	else {Header("Location:../production/menu.php?durum=no");}
 }
 if ($_GET['kategorisil']=="ok") {
 	$kategori_id=$_GET['kategori_id'];
 	$sil=$db->prepare("DELETE FROM kategori where kategori_id=:id");
 	$kontrol=$sil->execute(array('id' => $kategori_id));
-	if ($kontrol) {Header("Location:../production/kategori.php?sil=ok");} 
-	else {Header("Location:../production/kategori.php?sil=no");}
+	if ($kontrol) {Header("Location:../production/kategori.php?durum=ok");} 
+	else {Header("Location:../production/kategori.php?durum=no");}
 }
 if ($_GET['slidersil']=="ok") {
 	$slider_id=$_GET['slider_id'];
 	$sil=$db->prepare("DELETE FROM slider where slider_id=:id");
 	$kontrol=$sil->execute(array('id' => $slider_id));
-	if ($kontrol) {Header("Location:../production/slider.php?sil=ok");} 
-	else {Header("Location:../production/slider.php?sil=no");}
+	if ($kontrol) {Header("Location:../production/slider.php?durum=ok");} 
+	else {Header("Location:../production/slider.php?durum=no");}
+}
+if ($_GET['urunsil']=="ok") {
+	$urun_id=$_GET['urun_id'];
+	$sil=$db->prepare("DELETE FROM urun where urun_id=:id");
+	$kontrol=$sil->execute(array('id' => $urun_id));
+	if ($kontrol) {Header("Location:../production/urun.php?durum=ok");} 
+	else {Header("Location:../production/urun.php?durum=no");}
 }
 //echo "burdasın";exit;
 ?>
