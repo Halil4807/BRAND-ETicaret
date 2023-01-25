@@ -440,16 +440,61 @@ if (isset($_POST['menukaydet'])) {
 		'menu_seourl' => $menu_seourl,
 		'menu_durum' => $_POST['menu_durum']
 	));
-	if ($insert) {
-		
+	if ($insert) {		
 		Header("Location:../production/menu.php?durum=ok");
 	} else {
-
 		Header("Location:../production/menu.php?durum=no");
 	}
 }
 
+if (isset($_POST['kategori_sira'])&&isset($_POST['kategoriuzenle'])) {
+	$kategori_id=$_POST['kategori_id'];
+	$kategori_ad=$_POST['kategori_ad'];
+	//$kategori_seourl=seo($_POST['kategori_ad']);
 
+	$kategori_seourl=SEOLink($_POST['kategori_ad']);
+	$ad=$_POST['kategori_ad'];
+
+	$ayarkaydet=$db->prepare("UPDATE kategori SET
+		kategori_sira=:kategori_sira,
+		kategori_ad=:kategori_ad,
+		kategori_ust=:kategori_ust,
+		kategori_seourl=:kategori_seourl,
+		kategori_durum=:kategori_durum
+		WHERE kategori_id={$_POST['kategori_id']}");
+	$update=$ayarkaydet->execute(array(
+		'kategori_sira' => $_POST['kategori_sira'],
+		'kategori_ad' => $_POST['kategori_ad'],
+		'kategori_ust' => $_POST['kategori_ust'],
+		'kategori_seourl' => $kategori_seourl,
+		'kategori_durum' => $_POST['kategori_durum']
+	));
+	if ($update) {Header("Location:../production/kategori-duzenle.php?kategori_id=$kategori_id&durum=ok&$kategori_ad");} 
+	else {Header("Location:../production/kategori-duzenle.php?kategori_id=$kategori_id&durum=no");}
+}
+
+if (isset($_POST['kategorikaydet'])) {
+	$kategori_seourl=SEOLink($_POST['kategori_ad']);
+	$ayarekle=$db->prepare("INSERT INTO kategori SET
+		kategori_ad=:kategori_ad,
+		kategori_ust=:kategori_ust,
+		kategori_sira=:kategori_sira,
+		kategori_seourl=:kategori_seourl,
+		kategori_durum=:kategori_durum
+		");
+	$insert=$ayarekle->execute(array(
+		'kategori_ad' => $_POST['kategori_ad'],
+		'kategori_ust' => $_POST['kategori_ust'],
+		'kategori_sira' => $_POST['kategori_sira'],
+		'kategori_seourl' => $kategori_seourl,
+		'kategori_durum' => $_POST['kategori_durum']
+	));
+	if ($insert) {		
+		Header("Location:../production/kategori.php?durum=ok");
+	} else {
+		Header("Location:../production/kategori.php?durum=no");
+	}
+}
 
 if (isset($_POST['sliderkaydet'])) {
 
@@ -519,13 +564,6 @@ if (isset($_POST['sliderduzenle'])) {
 	}
 }
 
-if (isset($_POST['gomenu'])) {
-	Header("Location:../production/menu.php");
-}
-if (isset($_POST['goslider'])) {
-	Header("Location:../production/slider.php");
-}
-
 if ($_GET['kullanicisil']=="ok") {
 	$kullanici_id=$_GET['kullanici_id'];
 	$sil=$db->prepare("DELETE FROM kullanici where kullanici_id=:id");
@@ -540,6 +578,13 @@ if ($_GET['menusil']=="ok") {
 	$kontrol=$sil->execute(array('id' => $menu_id));
 	if ($kontrol) {Header("Location:../production/menu.php?sil=ok");} 
 	else {Header("Location:../production/menu.php?sil=no");}
+}
+if ($_GET['kategorisil']=="ok") {
+	$kategori_id=$_GET['kategori_id'];
+	$sil=$db->prepare("DELETE FROM kategori where kategori_id=:id");
+	$kontrol=$sil->execute(array('id' => $kategori_id));
+	if ($kontrol) {Header("Location:../production/kategori.php?sil=ok");} 
+	else {Header("Location:../production/kategori.php?sil=no");}
 }
 if ($_GET['slidersil']=="ok") {
 	$slider_id=$_GET['slider_id'];

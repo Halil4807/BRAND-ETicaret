@@ -107,7 +107,7 @@ if ($say==0) {
                   <li><a href="hakkimizda.php"><i class="fa fa-info"></i> Hakkimizda </span></a>
                   <li><a href="kullanici.php"><i class="fa fa-user"></i> Kullanıcılar </span></a>
                   <li><a href="menu.php"><i class="fa fa-list"></i> Menüler </span></a>
-                  <li><a href="kategori.php"><i class="fa fa-list"></i> Kategoriler </span></a>
+                  <li><a href="kategori.php"><i class="fa fa-th-large"></i> Kategoriler </span></a>
                   <li><a href="slider.php"><i class="fa fa-image"></i> Slider </span></a>
                   
                 </ul>
