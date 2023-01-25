@@ -152,7 +152,7 @@ if (isset($_GET['durum'])&&$_GET['durum']=="no") {
 	echo "<script type='text/javascript'>alert('$message');</script>"; 
 }
 elseif (isset($_GET['durum'])&&$_GET['durum']=="exit")
-{
+{ 
 	$message = "Başarıyla çıkış yaptınız.";
 	echo "<script type='text/javascript'>alert('$message');</script>"; 
 }

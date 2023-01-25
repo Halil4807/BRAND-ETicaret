@@ -19,6 +19,9 @@ $kullanicisor->execute(array(
 $say=$kullanicisor->rowCount();
 $kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 
+
+$kategoricek=$db->query("SELECT * FROM kategori")->fetchAll(PDO::FETCH_ASSOC);
+
 if ($say==0) {
   header("Location:login.php?durum=izinsiz");
   exit;

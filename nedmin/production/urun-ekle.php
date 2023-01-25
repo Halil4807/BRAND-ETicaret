@@ -43,12 +43,19 @@
                             ../ Bir üst dizine çık 
                           -->
                           <form action="../netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                            
+
+
+
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori <span class="required">*</span>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori<span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="first-name" name="kategori_id" required="required" class="form-control col-md-7 col-xs-12">
+                                <select class="form-control" name="kategori_id" required>
+                                    <option value="0" selected>Kategori Seçiniz</option>
+                                    <?php foreach ($kategoricek as $key => $value) {
+                                      echo '<option value="'.$value['kategori_id'].'">'.$value['kategori_ad'].'</option>';
+                                    } ?>
+                                </select>
                               </div>
                             </div>
                             <div class="form-group">
