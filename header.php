@@ -21,6 +21,9 @@ if (isset($_SESSION['kullanici_mail'])) {
 	));
 	$kullanicicek=$kullanicisor->fetch(PDO::FETCH_ASSOC);
 }
+
+$kategoricek=$db->query("SELECT * FROM kategori")->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -70,7 +73,7 @@ if (isset($_SESSION['kullanici_mail'])) {
     									<a href="#" id="reg" class="btn btn-default btn-dark">Giriş Yap<span>-- veya --</span>Kayıt Ol</a>
     								<?php } else {?>
     									<a href="#"  class="btn btn-default btn-dark">Hoşgeldin <?php echo $kullanicicek['kullanici_adsoyad']; ?></a>
-    							<?php } ?>
+    								<?php } ?>
     								<div class="regwrap">
     									<div  class="row">
     										<div class="col-md-6 regform">

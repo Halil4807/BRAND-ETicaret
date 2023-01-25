@@ -3,7 +3,7 @@
 include 'header.php'; 
 
 //Belirli veriyi seçme işlemi
-$kategorisor=$db->prepare("SELECT * FROM kategori");
+$kategorisor=$db->prepare("SELECT * FROM kategori ORDER BY kategori_sira ASC");
 $kategorisor->execute();
 
 ?>

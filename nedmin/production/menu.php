@@ -3,7 +3,7 @@
 include 'header.php'; 
 
 //Belirli veriyi seçme işlemi
-$menusor=$db->prepare("SELECT * FROM menu");
+$menusor=$db->prepare("SELECT * FROM menu ORDER BY menu_sira ASC");
 $menusor->execute();
 
 ?>
@@ -24,11 +24,11 @@ $menusor->execute();
 
               if (isset($_GET['durum'])&&$_GET['durum']=="ok") {?>
 
-              <b style="color:green;">İşlem Başarılı...</b>
+                <b style="color:green;">İşlem Başarılı...</b>
 
               <?php } elseif (isset ($_GET['durum'])&&$_GET['durum']=="no") {?>
 
-              <b style="color:red;">İşlem Başarısız...</b>
+                <b style="color:red;">İşlem Başarısız...</b>
 
               <?php }
 
@@ -71,15 +71,15 @@ $menusor->execute();
                 <?php 
 
                 while($menucek=$menusor->fetch(PDO::FETCH_ASSOC)) {?>
-                <tr>
-                  <td width="5%"><?php echo $menucek['menu_sira'] ?></td>
-                  <td><?php echo $menucek['menu_ad'] ?></td>
-                  <td><?php echo $menucek['menu_ust'] ?></td>
-                  <td><?php echo $menucek['menu_url'] ?></td>
-                  <td><?php echo ($menucek['menu_durum'])=='1'?"Aktif":"Pasif" ?></td>
-                  <td width="5%"><center><a href="menu-duzenle.php?menu_id=<?php echo $menucek['menu_id']; ?>"><button class="btn btn-primary btn-xs">Düzenle</button></a></center></td>
-                  <td width="5%"><center><a href="../netting/islem.php?menu_id=<?php echo $menucek['menu_id']; ?>&menusil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
-                </tr>
+                  <tr>
+                    <td width="5%"><?php echo $menucek['menu_sira'] ?></td>
+                    <td><?php echo $menucek['menu_ad'] ?></td>
+                    <td><?php echo $menucek['menu_ust'] ?></td>
+                    <td><?php echo $menucek['menu_url'] ?></td>
+                    <td><?php echo ($menucek['menu_durum'])=='1'?"Aktif":"Pasif" ?></td>
+                    <td width="5%"><center><a href="menu-duzenle.php?menu_id=<?php echo $menucek['menu_id']; ?>"><button class="btn btn-primary btn-xs">Düzenle</button></a></center></td>
+                    <td width="5%"><center><a href="../netting/islem.php?menu_id=<?php echo $menucek['menu_id']; ?>&menusil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
+                  </tr>
                 <?php  }
 
                 ?>
