@@ -1,6 +1,4 @@
 <?php 
-ob_start();
-session_start();
 
 function SEOLink($baslik)
 {
