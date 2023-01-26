@@ -33,14 +33,14 @@ $hakkimizdacek=$hakkimizdasor->fetch(PDO::FETCH_ASSOC);
 			<?php while($uruncek=$urunsor->fetch(PDO::FETCH_ASSOC)){ ?>
 				<div class="item">
 					<div class="productwrap">
-						<div class="pr-img">
-							<div class="hot"></div>
-							<a href="product.htm"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
-							<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><?php echo $uruncek['urun_fiyat']; ?></span></div></div>
+							<div class="pr-img">
+								<div class="hot"></div>
+								<a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><img src="images\sample-3.jpg" alt="" class="img-responsive"></a>
+								<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><span class="oldprice"><?php echo $uruncek['urun_fiyat']*1.50 ?> TL</span><?php echo $uruncek['urun_fiyat'] ?> TL</span></div></div>
+							</div>
+							<span class="smalltitle"><a href="product.htm"><?php echo $uruncek['urun_ad'] ?></a></span>
+							<span class="smalldesc">Ürün Kodu.: <?php echo $uruncek['urun_id'] ?></span>
 						</div>
-						<span class="smalltitle"><a href="product.htm"><?php echo $uruncek['urun_ad']; ?></a></span>
-						<span class="smalldesc">Ürün Kodu: <?php echo $uruncek['urun_id']; ?></span>
-					</div>
 				</div>
 
 
