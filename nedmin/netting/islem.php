@@ -520,7 +520,7 @@ if (isset($_POST['urun_id'])&&isset($_POST['urunduzenle'])) {
 	$urun_id=$_POST['urun_id'];
 	$urun_ad=$_POST['urun_ad'];
 	//$urun_seourl=seo($_POST['urun_ad']);
-echo $_POST['urun_stok'];
+	echo $_POST['urun_stok'];
 	$urun_seourl=SEOLink($_POST['urun_ad']);
 
 	$ayarkaydet=$db->prepare("UPDATE urun SET
@@ -685,6 +685,30 @@ if ($_GET['urunsil']=="ok") {
 	$kontrol=$sil->execute(array('id' => $urun_id));
 	if ($kontrol) {Header("Location:../production/urun.php?durum=ok");} 
 	else {Header("Location:../production/urun.php?durum=no");}
+}
+if ($_GET['yorumsil']=="ok") {
+	$yorum_id=$_GET['yorum_id'];
+	$sil=$db->prepare("DELETE FROM yorumlar where yorum_id=:id");
+	$kontrol=$sil->execute(array('id' => $yorum_id));
+	if ($kontrol) {Header("Location:../production/yorum.php?durum=ok");} 
+	else {Header("Location:../production/yorum.php?durum=no");}
+}
+if ($_GET['yorumchange']=="ok") {
+
+	$yorumdurum=$_GET['yorum_durum']; 
+	$yorum_id=$_GET['yorum_id']; 
+
+	if ($yorumdurum=="0") {	$yeniyorumdurum="1";}
+	else{$yeniyorumdurum="0";}
+
+	$ayarkaydet=$db->prepare("UPDATE yorumlar SET
+		yorum_durum=:yorum_durum
+		WHERE yorum_id={$yorum_id}");
+	$update=$ayarkaydet->execute(array(
+		'yorum_durum' => $yeniyorumdurum
+	));
+	if ($update) {Header("Location:../production/yorum.php?durum=ok");} 
+	else {Header("Location:../production/yorum.php?durum=no");}
 }
 //echo "burdasın";exit;
 ?>

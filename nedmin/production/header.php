@@ -59,6 +59,7 @@ if ($say==0) {
   <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+  <script src="https://kit.fontawesome.com/9ed6545a59.js" crossorigin="anonymous"></script>
   <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
   <script type="text/javascript">    function geri(){history.back()}  </script>
 
@@ -111,6 +112,7 @@ if ($say==0) {
                 <li><a href="kullanici.php"><i class="fa fa-user"></i> Kullanıcılar </span></a></li>
                 <li><a href="kategori.php"><i class="fa fa-th-large"></i> Kategoriler </span></a></li>
                 <li><a href="urun.php"><i class="fa fa-shopping-basket"></i> Ürünler </span></a></li>
+                <li><a href="yorum.php"><i class="fa fa-comment-dots"></i> Yorumlar </span></a></li>
                 <li><a href="menu.php"><i class="fa fa-list"></i> Menüler </span></a></li>
                 <li><a href="slider.php"><i class="fa fa-image"></i> Slider </span></a></li>
 
