@@ -129,6 +129,16 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
                               </select>
                             </div>
                           </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürünü Öne Çıkar <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select class="form-control" name="urun_onecikar" required>
+                                <option value="1" <?php echo $uruncek['urun_onecikar']=='1'?'selected=""':''; ?>>Aktif</option>
+                                <option value="0" <?php if($uruncek['urun_onecikar']=='0') {echo 'selected=""';} ?>>Pasif</option>
+                              </select>
+                            </div>
+                          </div>
                           <!-- Ck Editör Başlangıç -->
 
                           <div class="form-group">

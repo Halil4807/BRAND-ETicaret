@@ -511,6 +511,7 @@ echo $_POST['urun_stok'];
 		urun_detay=:urun_detay,
 		urun_seourl=:urun_seourl,
 		urun_keyboard=:urun_keyboard,
+		urun_onecikar=:urun_onecikar,
 		urun_durum=:urun_durum
 		WHERE urun_id={$_POST['urun_id']}");
 	$update=$ayarkaydet->execute(array(
@@ -520,6 +521,7 @@ echo $_POST['urun_stok'];
 		'urun_detay' => $_POST['urun_detay'],
 		'urun_fiyat' => $_POST['urun_fiyat'],
 		'urun_keyboard' => $_POST['urun_keyboard'],
+		'urun_onecikar' => $_POST['urun_onecikar'],
 		'urun_seourl' => $urun_seourl,
 		'urun_durum' => $_POST['urun_durum']
 	));
@@ -537,6 +539,7 @@ if (isset($_POST['urunkaydet'])) {
 		urun_detay=:urun_detay,
 		urun_seourl=:urun_seourl,
 		urun_keyboard=:urun_keyboard,
+		urun_onecikar=:urun_onecikar,
 		urun_durum=:urun_durum
 		");
 	$insert=$ayarekle->execute(array(
@@ -546,6 +549,7 @@ if (isset($_POST['urunkaydet'])) {
 		'urun_fiyat' => $_POST['urun_fiyat'],
 		'urun_detay' => $_POST['urun_detay'],
 		'urun_keyboard' => $_POST['urun_keyboard'],
+		'urun_onecikar' => $_POST['urun_onecikar'],
 		'urun_seourl' => $urun_seourl,
 		'urun_durum' => $_POST['urun_durum']
 	));
