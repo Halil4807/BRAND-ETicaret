@@ -98,7 +98,7 @@ if (isset($_GET['sef'])) {
 
 			</div>
 
-			<?php include 'sidebar.php' ?>
+			<?php include 'sidebar.php'; ?>
 		</div>
 		<div class="spacer"></div>
 	</div>
