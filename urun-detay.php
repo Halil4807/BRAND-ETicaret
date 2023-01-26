@@ -23,6 +23,15 @@ $kategorisor3->execute(array(
 ));
 $kategoricek3=$kategorisor3->fetch(PDO::FETCH_ASSOC);
 
+$yorumsor=$db->prepare("SELECT * FROM yorumlar where urun_id=:urun_id");
+$yorumsor->execute(array(
+	'urun_id' => $uruncek['urun_id']
+));
+$yorumsay=$yorumsor->rowCount();
+
+
+
+
 ?>
 
 
@@ -61,7 +70,7 @@ $kategoricek3=$kategorisor3->fetch(PDO::FETCH_ASSOC);
 									<input type="Number" class="form-control" id="adet" name="adet" value="1" min="1" max="<?php echo $uruncek['urun_stok']; ?>">
 								</div>
 								<div class="col-sm-4">
-									<button class="btn btn-default btn-red btn-sm"><span class="addchart">Sepete Ekle</span></button>
+									<button <?php if ($uruncek['urun_stok']==0){ echo "disabled";} ?> class="btn btn-default btn-red btn-sm"><span class="addchart">Sepete Ekle</span></button>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -95,7 +104,7 @@ $kategoricek3=$kategorisor3->fetch(PDO::FETCH_ASSOC);
 			<div class="tab-review">
 				<ul id="myTab" class="nav nav-tabs shop-tab">
 					<li class="active"><a href="#desc" data-toggle="tab">Açıklama</a></li>
-					<li class=""><a href="#rev" data-toggle="tab">Yorum (0)</a></li>
+					<li class=""><a href="#rev" data-toggle="tab">Yorum (<?php echo $yorumsay; ?>)</a></li>
 				</ul>
 				<div id="myTabContent" class="tab-content shop-tab-ct">
 					<div class="tab-pane fade active in" id="desc">
@@ -105,56 +114,74 @@ $kategoricek3=$kategorisor3->fetch(PDO::FETCH_ASSOC);
 					</div>
 					<div class="tab-pane fade" id="rev">
 
-						<!-- YORUM ALANI BAŞLANGIÇ -->
+						<h4>Yorum yazın <small align="right">
+							<?php 
+
+							if (isset($_GET['durum'])&&$_GET['durum']=="ok") {?>
+								<b style="color:green;">İşlem Başarılı...</b>
+							<?php } elseif (isset ($_GET['durum'])&&$_GET['durum']=="no") {?>
+								<b style="color:red;">İşlem Başarısız...</b>
+							<?php }
+						?></small>
+					</h4>
+
+					<?php if (isset($_SESSION['kullanici_mail'])) { ?>
+						<form action="nedmin/netting/islem.php" method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+							<input type="text" hidden name="urun_id" required="required" value="<?php echo $uruncek['urun_id'];?>">
+							<input type="text" hidden name="urun_seourl" required="required" value="<?php echo $uruncek['urun_seourl'];?>">
+							<input type="text" hidden name="kullanici_id" required="required" value="<?php echo $kullanicicek['kullanici_id'];?>">
+							<div class="form-group">
+								<textarea class="form-control" id="text" name="yorum_detay"></textarea>
+							</div>
+							<button type="submit" name="yorumekle" class="btn btn-default btn-red btn-sm">Yorum Ekle</button>
+						</form>
+
+					<?php } else {echo "Yorum yazmak için login olun!";} ?>
+					<p class="dash"></p>
+
+					<?php 
+					while($yorumcek=$yorumsor->fetch(PDO::FETCH_ASSOC)) {
+						$yorumkullanicisisor=$db->prepare("SELECT * FROM kullanici where kullanici_id=:kullanici_id");
+						$yorumkullanicisisor->execute(array('kullanici_id' => $yorumcek['kullanici_id']));
+						$yorumkullanicisicek=$yorumkullanicisisor->fetch(PDO::FETCH_ASSOC);
+						?>
 						<p class="dash">
-							<span>Jhon Doe</span> (11/25/2012)<br><br>
-							Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse.
+							<span> <?php echo $yorumkullanicisicek['kullanici_adsoyad']; ?>		</span> 
+							(<?php echo $yorumcek['yorum_zaman']; ?>)<br><br>
+							<?php echo $yorumcek['yorum_detay']; ?>
 						</p>
-						<!-- YORUM ALANI BİTİŞ -->
+					<?php } ?>
 
-						<h4>Yorum yazın</h4>
 
-						<?php if (isset($_SESSION['kullanici_mail'])) { ?>
-							<form role="form">
-								<div class="form-group">
-									<textarea class="form-control" id="text"></textarea>
-								</div>
-								<button type="submit" class="btn btn-default btn-red btn-sm">Submit</button>
-							</form>
-
-						<?php } else {echo "Yorum yazmak için login olun!";} ?>
-
-						
-
-					</div>
 				</div>
 			</div>
+		</div>
 
-			<div id="title-bg">
-				<div class="title">Related Product</div>
-			</div>
-			<div class="row prdct"><!--Products-->
+		<div id="title-bg">
+			<div class="title">Related Product</div>
+		</div>
+		<div class="row prdct"><!--Products-->
 
-				<?php while($benzeruruncek=$benzerurunsor->fetch(PDO::FETCH_ASSOC)){ ?>
-					<div class="col-md-4">
-						<div class="productwrap">
-							<div class="pr-img">
-								<div class="hot"></div>
-								<a href="product.htm"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
-								<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><?php echo $benzeruruncek['urun_fiyat']; ?></span></div></div>
-							</div>
-							<span class="smalltitle"><a href="product.htm"><?php echo $benzeruruncek['urun_ad']; ?></a></span>
-							<span class="smalldesc">Ürün Kodu: <?php echo $benzeruruncek['urun_id']; ?></span>
+			<?php while($benzeruruncek=$benzerurunsor->fetch(PDO::FETCH_ASSOC)){ ?>
+				<div class="col-md-4">
+					<div class="productwrap">
+						<div class="pr-img">
+							<div class="hot"></div>
+							<a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
+							<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><?php echo $benzeruruncek['urun_fiyat']; ?></span></div></div>
 						</div>
+						<span class="smalltitle"><a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><?php echo $benzeruruncek['urun_ad']; ?></a></span>
+						<span class="smalldesc">Ürün Kodu: <?php echo $benzeruruncek['urun_id']; ?></span>
 					</div>
-				<?php } ?>
+				</div>
+			<?php } ?>
 
 
-			</div><!--Products-->
-			<div class="spacer"></div>
-		</div><!--Main content-->
-		<?php include"sidebar.php"; ?>
-	</div>
+		</div><!--Products-->
+		<div class="spacer"></div>
+	</div><!--Main content-->
+	<?php include"sidebar.php"; ?>
+</div>
 </div>
 
 <?php include"footer.php"; ?>

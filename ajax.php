@@ -6,7 +6,7 @@ include 'nedmin/netting/baglan.php';
 $ilcek=$db->query("SELECT * FROM iller")->fetchAll(PDO::FETCH_ASSOC);
 
 $ilid=$_POST['il'];
-$ilcecek=$db->query("SELECT * FROM ilceler where il_id:'".$ilid."'")fetchAll(PDO::FETCH_ASSOC);
+$ilcecek=$db->query("SELECT * FROM ilceler where il_id:'".$ilid."'")->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?>

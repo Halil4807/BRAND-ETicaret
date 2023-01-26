@@ -138,13 +138,14 @@ if (isset($_POST['kullanicigiris'])) {
 	$say=$kullanicisor->rowCount();
 	if ($say==1) {		
 		$_SESSION['kullanici_mail']=$_POST['kullanici_mail'];
-		header("Location:../../index.php");
+		header('Location: ' . $_SERVER['HTTP_REFERER'].'?durum=');
 		exit;
 	} else {
 		header("Location:../../index.php?durum=no");
 		exit;
 	}	
 }
+
 
 
 if (isset($_POST['logoduzenle'])) {
@@ -442,6 +443,25 @@ if (isset($_POST['menukaydet'])) {
 	));
 	if ($insert) {		
 		Header("Location:../production/menu.php?durum=ok");
+	} else {
+		Header("Location:../production/menu.php?durum=no");
+	}
+}
+
+if (isset($_POST['yorumekle'])) {
+
+	$yorumekle=$db->prepare("INSERT INTO yorumlar SET
+		kullanici_id=:kullanici_id,
+		urun_id=:urun_id,
+		yorum_detay=:yorum_detay
+		");
+	$insert=$yorumekle->execute(array(
+		'kullanici_id' => $_POST['kullanici_id'],
+		'urun_id' => $_POST['urun_id'],
+		'yorum_detay' => $_POST['yorum_detay']
+	));
+	if ($insert) {		
+		header('Location:../../urun-'.$_POST['urun_seourl'].'-'.$_POST['urun_id']."?durum=ok");
 	} else {
 		Header("Location:../production/menu.php?durum=no");
 	}
