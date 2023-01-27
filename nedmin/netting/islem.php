@@ -438,7 +438,7 @@ if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 		'menu_seourl' => $menu_seourl,
 		'menu_durum' => $_POST['menu_durum']
 	));
-	if ($update) {Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=ok&$menu_ad");} 
+	if ($update) {Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=ok");} 
 	else {Header("Location:../production/menu-duzenle.php?menu_id=$menu_id&durum=no");}
 }
 
@@ -467,6 +467,24 @@ if (isset($_POST['menukaydet'])) {
 	} else {
 		Header("Location:../production/menu.php?durum=no");
 	}
+}
+
+if (isset($_POST['banka_id'])&&isset($_POST['bankaduzenle'])) {
+
+	$bankaduzenle=$db->prepare("UPDATE banka SET
+		banka_ad=:banka_ad,
+		banka_iban=:banka_iban,
+		banka_hesapadsoyad=:banka_hesapadsoyad,
+		banka_durum=:banka_durum
+		WHERE banka_id={$_POST['banka_id']}");
+	$update=$bankaduzenle->execute(array(
+		'banka_ad' => $_POST['banka_ad'],
+		'banka_iban' => $_POST['banka_iban'],
+		'banka_hesapadsoyad' => $_POST['banka_hesapadsoyad'],
+		'banka_durum' => $_POST['banka_durum']
+	));
+	if ($update) {Header("Location:../production/banka.php?durum=ok&");} 
+	else {Header("Location:../production/banka.php?durum=no");}
 }
 
 if (isset($_POST['bankaekle'])) {

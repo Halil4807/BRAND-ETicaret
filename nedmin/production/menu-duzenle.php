@@ -17,7 +17,7 @@ $menucek=$menusor->fetch(PDO::FETCH_ASSOC);
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Kullanıcı Düzenleme<small>
+            <h2>Menü Düzenleme<small>
 
                       <!-- 
                         isset($_GET['durum'])&& eklenme sebebi aşağıdaki hatayı vermemesi
@@ -64,7 +64,7 @@ $menucek=$menusor->fetch(PDO::FETCH_ASSOC);
                             <input type="hidden" name="menu_id" value="<?php echo $menucek['menu_id']; ?>">
                             
                             <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menu Linki <span class="required">*</span>
+                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü Linki <span class="required">*</span>
                               </label>
                               <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="text" id="first-name" disabled=""  value="<?php 
@@ -77,7 +77,7 @@ $menucek=$menusor->fetch(PDO::FETCH_ASSOC);
                           </div>
 
                           <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menu Sıra <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Menü Sıra <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <input type="text" id="first-name" name="menu_sira" value="<?php echo $menucek['menu_sira']; ?>" required="required" class="form-control col-md-7 col-xs-12">
