@@ -194,10 +194,17 @@ $ilcek2=$db->query("SELECT * FROM iller")->fetchAll(PDO::FETCH_ASSOC);
     									<div class="clearfix"></div>
     								</div>
     							</div> -->
-    							<?php if (isset($_SESSION['kullanici_mail'])) {?>
+    							<?php 
+    							$kullanici_id=$kullanicicek['kullanici_id'];
+    							$sepetimsor=$db->prepare("SELECT * FROM sepet where kullanici_id=:id");
+    							$sepetimsor->execute(array(
+    								'id' => $kullanici_id
+    							));
+    							$say=$sepetimsor->rowCount();
+    							if (isset($_SESSION['kullanici_mail'])) {?>
     								<ul class="small-menu"><!--small-nav -->
     									<li><a href="hesabim" class="myacc">Hesabım</a></li>
-    									<li><a href="sepet" class="myshop">Spetim</a></li>
+    									<li><a href="sepet" class="myshop">Spetim<sup class="allprice"><?php echo $say; ?></sup></a></li>
     									<li><a href="logout.php" class="mycheck">Çıkış Yap</a></li>
     								</ul><!--small-nav -->
     							<?php } ?>  
