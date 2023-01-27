@@ -18,6 +18,8 @@ $urunresimsor->execute(array(
 	'urun_id' => $_GET['urun_id']
 ));
 
+$urunresimsay=$urunresimsor->rowCount();
+
 if ($urunsor->rowCount()==0) {
 	header("Location:index.php");
 	exit;
@@ -50,19 +52,32 @@ $yorumsay=$yorumsor->rowCount();
 			<div class="row">
 				<div class="col-md-6">
 
-					<?php  $sayac=0; 
-					while ($urunresimcek=$urunresimsor->fetch(PDO::FETCH_ASSOC)) {
-						if ($sayac==0) {  ?>
-							<div class="dt-img">
-								<div class="detpricetag"><div class="inner"><?php echo $uruncek['urun_fiyat']; ?><p class="fa fa-turkish-lira"></p></div></div>
-								<a class="fancybox" href="<?php echo $urunresimcek['urunresmi_adres']; ?>" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="<?php echo $urunresimcek['urunresmi_adres']; ?>" alt="" class="img-responsive"></a>
-							</div>
-						<?php } else{?>
-							<div class="thumb-img">
-								<a class="fancybox" href="<?php echo $urunresimcek['urunresmi_adres']; ?>" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="<?php echo $urunresimcek['urunresmi_adres']; ?>" alt="" class="img-responsive"></a>
-							</div>
-						<?php }
-						$sayac++;
+					<?php  
+					if ($urunresimsay!=0) {
+
+						$sayac=0; 
+						while ($urunresimcek=$urunresimsor->fetch(PDO::FETCH_ASSOC)) {
+							if ($sayac==0) {  ?>
+								<div class="dt-img">
+									<div class="detpricetag"><div class="inner"><?php echo $uruncek['urun_fiyat']; ?><p class="fa fa-turkish-lira"></p></div></div>
+									<a class="fancybox" href="<?php echo $urunresimcek['urunresmi_adres']; ?>" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="<?php echo $urunresimcek['urunresmi_adres']; ?>" alt="" class="img-responsive"></a>
+								</div>
+								<?php 
+							} 
+							else{?>
+								<div class="thumb-img">
+									<a class="fancybox" href="<?php echo $urunresimcek['urunresmi_adres']; ?>" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="<?php echo $urunresimcek['urunresmi_adres']; ?>" alt="" class="img-responsive"></a>
+								</div>
+								<?php 
+							}
+							$sayac++;
+						}
+
+					}else{?>
+						<div class="dt-img">
+							<a class="fancybox" href="dimg/logo-yok.png" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="dimg/logo-yok.png" alt="" class="img-responsive"></a>
+						</div>
+						<?php 
 					} ?>
 
 				</div>
