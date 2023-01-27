@@ -7,6 +7,12 @@ $urunsor->execute(array(
 ));
 $say=$urunsor->rowCount();
 $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
+
+$urunresimsor=$db->prepare("SELECT * FROM urunresmi where urun_id=:urun_id");
+$urunresimsor->execute(array(
+  'urun_id' => $uruncek['urun_id']
+));
+
 ?>
 <!-- page content -->
 <div class="right_col" role="main">
@@ -188,6 +194,34 @@ $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
                         </div>
 
                       </form>
+
+<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>Ürün Resmi</th>
+                  <th>Ürün Adı</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+
+                <?php 
+
+                while ($urunresimcek=$urunresimsor->fetch(PDO::FETCH_ASSOC)) {?>
+                  <tr>
+                    <td width="5%"><img width="200" src="../../<?php echo $urunresimcek['urunresmi_adres'] ?>"></td>
+                    <td><?php echo $uruncek['urun_ad'] ?></td>
+                    <td width="5%"><center><a href="../netting/islem.php?urun_id=<?php echo $urunresimcek['urun_id']; ?>&urunsil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
+                  </tr>
+                <?php  }
+
+                ?>
+
+
+              </tbody>
+            </table>
+
 
                     </div>
                   </div>

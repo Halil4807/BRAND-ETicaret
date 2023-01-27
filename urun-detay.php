@@ -55,11 +55,11 @@ $yorumsay=$yorumsor->rowCount();
 						if ($sayac==0) {  ?>
 							<div class="dt-img">
 								<div class="detpricetag"><div class="inner"><?php echo $uruncek['urun_fiyat']; ?><p class="fa fa-turkish-lira"></p></div></div>
-								<a class="fancybox" href="images\<?php echo $urunresimcek['urunresmi_adres']; ?>" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\<?php echo $urunresimcek['urunresmi_adres']; ?>" alt="" class="img-responsive"></a>
+								<a class="fancybox" href="<?php echo $urunresimcek['urunresmi_adres']; ?>" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="<?php echo $urunresimcek['urunresmi_adres']; ?>" alt="" class="img-responsive"></a>
 							</div>
 						<?php } else{?>
 							<div class="thumb-img">
-								<a class="fancybox" href="images\sample-4.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
+								<a class="fancybox" href="<?php echo $urunresimcek['urunresmi_adres']; ?>" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="<?php echo $urunresimcek['urunresmi_adres']; ?>" alt="" class="img-responsive"></a>
 							</div>
 						<?php }
 						$sayac++;
