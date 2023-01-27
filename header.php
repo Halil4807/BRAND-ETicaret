@@ -163,29 +163,11 @@ $ilcek2=$db->query("SELECT * FROM iller")->fetchAll(PDO::FETCH_ASSOC);
     									</ul>
     								</div>
     							</div>
-    							<div class="col-md-2 machart">
+    							<!-- <div class="col-md-2 machart">
     								<button id="popcart" class="btn btn-default btn-chart btn-sm "><span class="mychart">Cart</span>|<span class="allprice">$0.00</span></button>
     								<div class="popcart">
     									<table class="table table-condensed popcart-inner">
     										<tbody>
-    											<tr>
-    												<td>
-    													<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
-    												</td>
-    												<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
-    												<td>1X</td>
-    												<td>$138.80</td>
-    												<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
-    											</tr>
-    											<tr>
-    												<td>
-    													<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
-    												</td>
-    												<td><a href="product.htm">Casio Exilim Zoom</a><br><span>Color: green</span></td>
-    												<td>1X</td>
-    												<td>$138.80</td>
-    												<td><a href=""><i class="fa fa-times-circle fa-2x"></i></a></td>
-    											</tr>
     											<tr>
     												<td>
     													<a href="product.htm"><img src="images\dummy-1.png" alt="" class="img-responsive"></a>
@@ -211,11 +193,11 @@ $ilcek2=$db->query("SELECT * FROM iller")->fetchAll(PDO::FETCH_ASSOC);
     									</div>
     									<div class="clearfix"></div>
     								</div>
-    							</div>
+    							</div> -->
     							<?php if (isset($_SESSION['kullanici_mail'])) {?>
     								<ul class="small-menu"><!--small-nav -->
     									<li><a href="hesabim" class="myacc">Hesabım</a></li>
-    									<li><a href="sepetim" class="myshop">Spetim</a></li>
+    									<li><a href="sepet" class="myshop">Spetim</a></li>
     									<li><a href="logout.php" class="mycheck">Çıkış Yap</a></li>
     								</ul><!--small-nav -->
     							<?php } ?>  

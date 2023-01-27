@@ -25,6 +25,7 @@
 					<th>Ürün ad</th>
 					<th>Ürün Kodu</th>
 					<th>Adet</th>
+					<th>Adet Fiyat</th>
 					<th>Toplam Fiyat</th>
 				</tr>
 			</thead>
@@ -56,8 +57,9 @@
 						<td><img src="images\demo-img.jpg" width="100" alt=""></td>
 						<td><?php echo $uruncek['urun_ad'] ?></td>
 						<td><?php echo $uruncek['urun_id'] ?></td>
-						<td><form><input type="text" class="form-control quantity" value="<?php echo $sepetcek['urun_adet'] ?>"></form></td>
+						<td><form><input disabled type="text" class="form-control quantity" value="<?php echo $sepetcek['urun_adet'] ?>"></form></td>
 						<td><?php echo $uruncek['urun_fiyat'] ?></td>
+						<td><?php echo $uruncek['urun_fiyat']*$sepetcek['urun_adet'] ?></td>
 					</tr>
 				<?php } ?>
 
