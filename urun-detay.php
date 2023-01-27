@@ -7,11 +7,16 @@ $urunsor->execute(array(
 ));
 $uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
 
+
 $benzerurunsor=$db->prepare("SELECT * FROM urun where kategori_id=:kategori_id ORDER BY rand() LIMIT 3");
 $benzerurunsor->execute(array(
 	'kategori_id' => $uruncek['kategori_id']
 ));
 
+$urunresimsor=$db->prepare("SELECT * FROM urunresmi where urun_id=:urun_id");
+$urunresimsor->execute(array(
+	'urun_id' => $_GET['urun_id']
+));
 
 if ($urunsor->rowCount()==0) {
 	header("Location:index.php");
@@ -44,22 +49,22 @@ $yorumsay=$yorumsor->rowCount();
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<div class="dt-img">
-						<div class="detpricetag"><div class="inner"><?php echo $uruncek['urun_fiyat']; ?><p class="fa fa-turkish-lira"></p></div></div>
-						<a class="fancybox" href="images\sample-1.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-1.jpg" alt="" class="img-responsive"></a>
-					</div>
-					<div class="thumb-img">
-						<a class="fancybox" href="images\sample-4.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
-					</div>
-					<div class="thumb-img">
-						<a class="fancybox" href="images\sample-5.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-5.jpg" alt="" class="img-responsive"></a>
-					</div>
-					<div class="thumb-img">
-						<a class="fancybox" href="images\sample-1.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-1.jpg" alt="" class="img-responsive"></a>
-					</div>
-					<div class="thumb-img">
-						<a class="fancybox" href="images\sample-1.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-1.jpg" alt="" class="img-responsive"></a>
-					</div>
+
+					<?php  $sayac=0; 
+					while ($urunresimcek=$urunresimsor->fetch(PDO::FETCH_ASSOC)) {
+						if ($sayac==0) {  ?>
+							<div class="dt-img">
+								<div class="detpricetag"><div class="inner"><?php echo $uruncek['urun_fiyat']; ?><p class="fa fa-turkish-lira"></p></div></div>
+								<a class="fancybox" href="images\<?php echo $urunresimcek['urunresmi_adres']; ?>" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\<?php echo $urunresimcek['urunresmi_adres']; ?>" alt="" class="img-responsive"></a>
+							</div>
+						<?php } else{?>
+							<div class="thumb-img">
+								<a class="fancybox" href="images\sample-4.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
+							</div>
+						<?php }
+						$sayac++;
+					} ?>
+
 				</div>
 				<div class="col-md-6 det-desc">
 					<div class="productdata">
@@ -174,10 +179,10 @@ $yorumsay=$yorumsor->rowCount();
 					<div class="productwrap">
 						<div class="pr-img">
 							<div class="hot"></div>
-							<a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
+							<a href="urun-<?php echo $benzeruruncek["urun_seourl"].'-'.$benzeruruncek["urun_id"]?>"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
 							<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><?php echo $benzeruruncek['urun_fiyat']; ?></span></div></div>
 						</div>
-						<span class="smalltitle"><a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><?php echo $benzeruruncek['urun_ad']; ?></a></span>
+						<span class="smalltitle"><a href="urun-<?php echo $benzeruruncek["urun_seourl"].'-'.$benzeruruncek["urun_id"]?>"><?php echo $benzeruruncek['urun_ad']; ?></a></span>
 						<span class="smalldesc">Ürün Kodu: <?php echo $benzeruruncek['urun_id']; ?></span>
 					</div>
 				</div>
