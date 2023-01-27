@@ -693,6 +693,13 @@ if ($_GET['sepettensil']=="ok") {
 	if ($kontrol) {header('Location:../../sepet?durum=ok');} 
 	else {header('Location:../../sepet?durum=no');}
 }
+if ($_GET['urunresmisil']=="ok") {
+	$urunresmi_id=$_GET['urunresmi_id'];
+	$sil=$db->prepare("DELETE FROM urunresmi where urunresmi_id=:id");
+	$kontrol=$sil->execute(array('id' => $urunresmi_id));
+	if ($kontrol) {header('Location:../production/urun-duzenle.php?urun_id='.$_GET['urun_id'].'?durum=ok');} 
+	else {header('Location:../production/urun-duzenle.php?urun_id='.$_GET['urun_id'].'?durum=no');}
+}
 if ($_GET['yorumsil']=="ok") {
 	$yorum_id=$_GET['yorum_id'];
 	$sil=$db->prepare("DELETE FROM yorumlar where yorum_id=:id");

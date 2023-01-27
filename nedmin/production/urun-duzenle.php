@@ -212,7 +212,7 @@ $urunresimsor->execute(array(
                   <tr>
                     <td width="5%"><img width="200" src="../../<?php echo $urunresimcek['urunresmi_adres'] ?>"></td>
                     <td><?php echo $uruncek['urun_ad'] ?></td>
-                    <td width="5%"><center><a href="../netting/islem.php?urun_id=<?php echo $urunresimcek['urun_id']; ?>&urunsil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
+                    <td width="5%"><center><a href="../netting/islem.php?urunresmi_id=<?php echo $urunresimcek['urunresmi_id']; ?>&urun_id=<?php echo $uruncek['urun_id']; ?>&urunresmisil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
                   </tr>
                 <?php  }
 
