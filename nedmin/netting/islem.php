@@ -766,6 +766,14 @@ if ($_GET['yorumsil']=="ok") {
 	if ($kontrol) {Header("Location:../production/yorum.php?durum=ok");} 
 	else {Header("Location:../production/yorum.php?durum=no");}
 }
+if ($_GET['bankasil']=="ok") {
+	$banka_id=$_GET['banka_id'];
+	$sil=$db->prepare("DELETE FROM banka where banka_id=:id");
+	$kontrol=$sil->execute(array('id' => $banka_id));
+	if ($kontrol) {Header("Location:../production/banka.php?durum=ok");} 
+	else {Header("Location:../production/banka.php?durum=no");}
+}
+
 if ($_GET['yorumchange']=="ok") {
 
 	$yorumdurum=$_GET['yorum_durum']; 
