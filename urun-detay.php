@@ -62,15 +62,18 @@ $yorumsay=$yorumsor->rowCount();
 						<div class="infospan">Ürün Kategorisi <span><?php echo $kategoricek3['kategori_ad']; ?></span></div>
 						<div class="infospan">Ürün Kodu <span><?php echo $uruncek['urun_id']; ?></span></div>
 						<div class="infospan">Ürün Fiyatı <span><?php echo $uruncek['urun_fiyat']; ?> <p class="fa fa-turkish-lira"></p></span></div>
-
-						<form class="form-horizontal ava" role="form">
+						<br>
+						<form action="nedmin/netting/islem.php" method="POST">
 							<div class="form-group">
+								<input type="text" hidden name="urun_id" required="required" value="<?php echo $uruncek['urun_id'];?>">
+								<input type="text" hidden name="urun_seourl" required="required" value="<?php echo $uruncek['urun_seourl'];?>">
+								<input type="text" hidden name="kullanici_id" required="required" value="<?php echo $kullanicicek['kullanici_id'];?>">
 								<label for="qty" class="col-sm-2 control-label">Adet</label>
 								<div class="col-sm-4">
-									<input type="Number" class="form-control" id="adet" name="adet" value="1" min="1" max="<?php echo $uruncek['urun_stok']; ?>">
+									<input type="Number" class="form-control" id="urun_adet" name="urun_adet" value="1" min="1" max="<?php echo $uruncek['urun_stok']; ?>">
 								</div>
 								<div class="col-sm-4">
-									<button <?php if ($uruncek['urun_stok']==0){ echo "disabled";} ?> class="btn btn-default btn-red btn-sm"><span class="addchart">Sepete Ekle</span></button>
+									<button type="submit" name="sepeteekle" class="btn btn-default btn-red btn-sm"<?php if ($uruncek['urun_stok']==0){ echo "disabled";} ?>><span class="addchart">Sepete Ekle</span></button>
 								</div>
 								<div class="clearfix"></div>
 							</div>
@@ -84,7 +87,7 @@ $yorumsay=$yorumsor->rowCount();
 								<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=xa-4f0d0827271d1c3b"></script>
 								<div class="clearfix"></div>
 							</div>
-							<div class="avatock"><span>
+							<div class="avatock">Stok Durumu: <span>
 								<?php 
 								if ($uruncek['urun_stok']>0) {
 									echo $uruncek['urun_stok'];

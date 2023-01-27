@@ -20,7 +20,7 @@
 		<table class="table table-bordered chart">
 			<thead>
 				<tr>
-					<th>Remove</th>
+					<th>Sil</th>
 					<th>Ürün Resim</th>
 					<th>Ürün ad</th>
 					<th>Ürün Kodu</th>
@@ -51,7 +51,8 @@
 					?>
 
 					<tr>
-						<td><form><input type="checkbox"></form></td>
+						
+						<td width="5%"><center><a href="nedmin/netting/islem.php?sepet_id=<?php echo $sepetcek['sepet_id']; ?>&sepettensil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
 						<td><img src="images\demo-img.jpg" width="100" alt=""></td>
 						<td><?php echo $uruncek['urun_ad'] ?></td>
 						<td><?php echo $uruncek['urun_id'] ?></td>

@@ -686,6 +686,13 @@ if ($_GET['urunsil']=="ok") {
 	if ($kontrol) {Header("Location:../production/urun.php?durum=ok");} 
 	else {Header("Location:../production/urun.php?durum=no");}
 }
+if ($_GET['sepettensil']=="ok") {
+	$sepet_id=$_GET['sepet_id'];
+	$sil=$db->prepare("DELETE FROM sepet where sepet_id=:id");
+	$kontrol=$sil->execute(array('id' => $sepet_id));
+	if ($kontrol) {header('Location:../../sepet?durum=ok');} 
+	else {header('Location:../../sepet?durum=no');}
+}
 if ($_GET['yorumsil']=="ok") {
 	$yorum_id=$_GET['yorum_id'];
 	$sil=$db->prepare("DELETE FROM yorumlar where yorum_id=:id");
@@ -710,5 +717,25 @@ if ($_GET['yorumchange']=="ok") {
 	if ($update) {Header("Location:../production/yorum.php?durum=ok");} 
 	else {Header("Location:../production/yorum.php?durum=no");}
 }
+
+if (isset($_POST['sepeteekle'])) {
+
+	$sepeteekle=$db->prepare("INSERT INTO sepet SET
+		kullanici_id=:kullanici_id,
+		urun_id=:urun_id,
+		urun_adet=:urun_adet
+		");
+	$insert=$sepeteekle->execute(array(
+		'kullanici_id' => $_POST['kullanici_id'],
+		'urun_id' => $_POST['urun_id'],
+		'urun_adet' => $_POST['urun_adet']
+	));
+	if ($insert) {		
+		header('Location:../../urun-'.$_POST['urun_seourl'].'-'.$_POST['urun_id']."?durum=ok");
+	} else {
+		Header("Location:../production/menu.php?durum=no");
+	}
+}
+
 //echo "burdasın";exit;
 ?>
