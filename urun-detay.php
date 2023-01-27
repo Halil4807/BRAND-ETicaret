@@ -189,6 +189,7 @@ $yorumsay=$yorumsor->rowCount();
 			<?php } ?>
 
 
+
 		</div><!--Products-->
 		<div class="spacer"></div>
 	</div><!--Main content-->

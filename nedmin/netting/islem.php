@@ -147,7 +147,6 @@ if (isset($_POST['kullanicigiris'])) {
 }
 
 
-
 if (isset($_POST['logoduzenle'])) {
 	$uploads_dir = '../../dimg';
 	@$tmp_name = $_FILES['ayar_logo']["tmp_name"];
@@ -162,11 +161,33 @@ if (isset($_POST['logoduzenle'])) {
 
 	$update=$duzenle->execute(array('logo' => $resimgyol ));
 	if ($update) {
+		//eski resmi sil
 		$resimsilunlink=$_POST['eski_yol'];
 		unlink("../../$resimsilunlink");
+
 		Header("Location:../production/genel-ayar.php?durum=ok");
 	} else {
 		Header("Location:../production/genel-ayar.php?durum=no");
+	}
+}
+
+if (isset($_POST['urunresmi_ekle'])) {
+	$uploads_dir = '../../dimg';
+	@$tmp_name = $_FILES['urunresmi']["tmp_name"];
+	@$name = $_FILES['urunresmi']["name"];
+	$time=date("dmyHis");
+	$resimgyol=substr($uploads_dir, 6)."/".$time.$name;
+	@move_uploaded_file($tmp_name, "$uploads_dir/$time$name");
+
+	$urunresmi_ekle=$db->prepare("INSERT INTO urunresmi SET
+		urunresmi_adres=:urunresmi_adres,
+		urun_id=:urun_id");
+
+	$insert=$urunresmi_ekle->execute(array('urunresmi_adres' => $resimgyol,'urun_id' => $_POST['urun_id'] ));
+	if ($insert) {
+		Header("Location:../production/urun-duzenle.php?urun_id=".$_POST['urun_id']."&durum=ok");
+	} else {
+		Header("Location:../production/urun-duzenle.php?urun_id=".$_POST['urun_id']."&durum=no");
 	}
 }
 

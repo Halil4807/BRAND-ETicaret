@@ -81,18 +81,18 @@ $urunresimsor->execute(array(
 
 
 
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori<span class="required">*</span>
-                              </label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select class="form-control" name="kategori_id" required>
-                                    <option value="0" selected>Kategori Seçiniz</option>
-                                    <?php foreach ($kategoricek as $key => $value) {
-                                      echo $value['kategori_id']==$uruncek['kategori_id']?'<option selected=""':'<option'; echo ' value="'.$value['kategori_id'].'">'.$value['kategori_ad'].'</option>';
-                                    } ?>
-                                </select>
-                              </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Kategori<span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <select class="form-control" name="kategori_id" required>
+                                <option value="0" selected>Kategori Seçiniz</option>
+                                <?php foreach ($kategoricek as $key => $value) {
+                                  echo $value['kategori_id']==$uruncek['kategori_id']?'<option selected=""':'<option'; echo ' value="'.$value['kategori_id'].'">'.$value['kategori_ad'].'</option>';
+                                } ?>
+                              </select>
                             </div>
+                          </div>
                           
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Ürün Adı <span class="required">*</span>
@@ -194,41 +194,65 @@ $urunresimsor->execute(array(
                         </div>
 
                       </form>
-
-<table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th>Ürün Resmi</th>
-                  <th>Ürün Adı</th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody>
-
-                <?php 
-
-                while ($urunresimcek=$urunresimsor->fetch(PDO::FETCH_ASSOC)) {?>
-                  <tr>
-                    <td width="5%"><img width="200" src="../../<?php echo $urunresimcek['urunresmi_adres'] ?>"></td>
-                    <td><?php echo $uruncek['urun_ad'] ?></td>
-                    <td width="5%"><center><a href="../netting/islem.php?urunresmi_id=<?php echo $urunresimcek['urunresmi_id']; ?>&urun_id=<?php echo $uruncek['urun_id']; ?>&urunresmisil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
-                  </tr>
-                <?php  }
-
-                ?>
-
-
-              </tbody>
-            </table>
-
-
                     </div>
                   </div>
                 </div>
               </div>
 
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="x_panel">
+                    <div class="x_title col-md-8 col-sm-8 col-xs-12">
+                      <table id="datatable-responsive" class="center table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                        <thead>
+                          <tr>
+                            <th>Ürün Resmi</th>
+                            <th>Ürün Adı</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+
+                        <tbody>
+
+                          <?php 
+
+                          while ($urunresimcek=$urunresimsor->fetch(PDO::FETCH_ASSOC)) {?>
+                            <tr>
+                              <td width="5%"><img width="200" src="../../<?php echo $urunresimcek['urunresmi_adres'] ?>"></td>
+                              <td><?php echo $uruncek['urun_ad'] ?></td>
+                              <td width="5%"><center><a href="../netting/islem.php?urunresmi_id=<?php echo $urunresimcek['urunresmi_id']; ?>&urun_id=<?php echo $uruncek['urun_id']; ?>&urunresmisil=ok"><button class="btn btn-danger btn-xs">Sil</button></a></center></td>
+                            </tr>
+                          <?php  }
+
+                          ?>
+
+
+                        </tbody>
+                      </div>
+                    </table>
+
+                    <form action="../netting/islem.php" method="POST" enctype="multipart/form-data"  data-parsley-validate class="form-horizontal form-label-left">
+
+                      <input type="hidden" name="urun_id" value="<?php echo $uruncek['urun_id']; ?>">
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Resim Seç<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" id="first-name"  name="urunresmi" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div align="right" class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button type="submit" name="urunresmi_ekle" class="btn btn-success">Ürün Resmi Ekle</button>
+                      </div>
+
+                    </form>
+
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
-          <!-- /page content -->
-          <?php include 'footer.php'; ?>
+        </div>
+        <!-- /page content -->
+        <?php include 'footer.php'; ?>
