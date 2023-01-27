@@ -8,15 +8,15 @@ if (isset($_GET['sef'])) {
 	$kategorisor2=$db->prepare("SELECT * FROM kategori where kategori_seourl=:seourl");
 	$kategorisor2->execute(array(
 		'seourl' => $_GET['sef']
-		));
+	));
 	$kategoricek2=$kategorisor2->fetch(PDO::FETCH_ASSOC);
 
-	 $kategori_id=$kategoricek2['kategori_id'];
+	$kategori_id=$kategoricek2['kategori_id'];
 
 	$urunsor=$db->prepare("SELECT * FROM urun where kategori_id=:kategori_id order by urun_id DESC");
 	$urunsor->execute(array(
 		'kategori_id' => $kategori_id
-		));
+	));
 
 	$say=$urunsor->rowCount();
 
@@ -68,7 +68,30 @@ if (isset($_GET['sef'])) {
 						<div class="productwrap">
 							<div class="pr-img">
 								<div class="hot"></div>
-								<a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><img src="images\sample-3.jpg" alt="" class="img-responsive"></a>
+
+
+								<?php 
+								$urunresimsor=$db->prepare("SELECT * FROM urunresmi where urun_id=:urun_id");
+								$urunresimsor->execute(array(
+									'urun_id' => $uruncek["urun_id"]
+								));
+								$urunresimcek=$urunresimsor->fetch(PDO::FETCH_ASSOC);
+								$urunresimsay=$urunresimsor->rowCount();
+								if ($urunresimsay!=0) {?>
+									<a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><img src="<?php echo $urunresimcek["urunresmi_adres"] ?>" alt="" class="img-responsive"></a>
+									<?php 
+								}
+								else{?>
+
+
+									<a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><img src="dimg/urun-resmi-yok.png" alt="" class="img-responsive"></a>
+
+									<?php 
+									
+								}
+								?>
+
+								
 								<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><span class="oldprice"><?php echo $uruncek['urun_fiyat']*1.50 ?> TL</span><?php echo $uruncek['urun_fiyat'] ?> TL</span></div></div>
 							</div>
 							<span class="smalltitle"><a href="urun-<?php echo $uruncek["urun_seourl"].'-'.$uruncek["urun_id"]?>"><?php echo $uruncek['urun_ad'] ?></a></span>
@@ -77,13 +100,13 @@ if (isset($_GET['sef'])) {
 					</div>
 
 
-					<?php } ?>
+				<?php } ?>
 
 
 
 
 
-				</div><!--Products-->
+			</div><!--Products-->
 
 <!-- 
 				<ul class="pagination shop-pag">

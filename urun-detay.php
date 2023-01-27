@@ -194,21 +194,40 @@ $yorumsay=$yorumsor->rowCount();
 					<div class="productwrap">
 						<div class="pr-img">
 							<div class="hot"></div>
-							<a href="urun-<?php echo $benzeruruncek["urun_seourl"].'-'.$benzeruruncek["urun_id"]?>"><img src="images\sample-4.jpg" alt="" class="img-responsive"></a>
-							<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><?php echo $benzeruruncek['urun_fiyat']; ?></span></div></div>
-						</div>
-						<span class="smalltitle"><a href="urun-<?php echo $benzeruruncek["urun_seourl"].'-'.$benzeruruncek["urun_id"]?>"><?php echo $benzeruruncek['urun_ad']; ?></a></span>
-						<span class="smalldesc">Ürün Kodu: <?php echo $benzeruruncek['urun_id']; ?></span>
+							<?php 
+							$benzerurunresimsor=$db->prepare("SELECT * FROM urunresmi where urun_id=:urun_id");
+							$benzerurunresimsor->execute(array(
+								'urun_id' => $benzeruruncek["urun_id"]
+							));
+							$benzerurunresimcek=$benzerurunresimsor->fetch(PDO::FETCH_ASSOC);
+							$benzerurunresimsay=$benzerurunresimsor->rowCount();
+							if ($benzerurunresimsay!=0) {?>
+								<a href="urun-<?php echo $benzeruruncek["urun_seourl"].'-'.$benzeruruncek["urun_id"]?>"><img src="<?php echo $benzerurunresimcek["urunresmi_adres"] ?>" alt="" class="img-responsive"></a>
+								<?php 
+							}
+							else{?>
+
+
+							<a href="urun-<?php echo $benzeruruncek["urun_seourl"].'-'.$benzeruruncek["urun_id"]?>"><img src="dimg/urun-resmi-yok.png" alt="" class="img-responsive"></a>
+
+							<?php 
+							
+						}
+						?>
+						<div class="pricetag on-sale"><div class="inner on-sale"><span class="onsale"><?php echo $benzeruruncek['urun_fiyat']; ?></span></div></div>
 					</div>
+					<span class="smalltitle"><a href="urun-<?php echo $benzeruruncek["urun_seourl"].'-'.$benzeruruncek["urun_id"]?>"><?php echo $benzeruruncek['urun_ad']; ?></a></span>
+					<span class="smalldesc">Ürün Kodu: <?php echo $benzeruruncek['urun_id']; ?></span>
 				</div>
-			<?php } ?>
+			</div>
+		<?php } ?>
 
 
 
-		</div><!--Products-->
-		<div class="spacer"></div>
-	</div><!--Main content-->
-	<?php include"sidebar.php"; ?>
+	</div><!--Products-->
+	<div class="spacer"></div>
+</div><!--Main content-->
+<?php include"sidebar.php"; ?>
 </div>
 </div>
 
