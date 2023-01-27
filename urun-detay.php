@@ -23,9 +23,10 @@ $kategorisor3->execute(array(
 ));
 $kategoricek3=$kategorisor3->fetch(PDO::FETCH_ASSOC);
 
-$yorumsor=$db->prepare("SELECT * FROM yorumlar where urun_id=:urun_id");
+$yorumsor=$db->prepare("SELECT * FROM yorumlar where urun_id=:urun_id AND yorum_durum=:yorum_durum");
 $yorumsor->execute(array(
-	'urun_id' => $uruncek['urun_id']
+	'urun_id' => $uruncek['urun_id'],
+	'yorum_durum' => '1'
 ));
 $yorumsay=$yorumsor->rowCount();
 
@@ -52,6 +53,9 @@ $yorumsay=$yorumsor->rowCount();
 					</div>
 					<div class="thumb-img">
 						<a class="fancybox" href="images\sample-5.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-5.jpg" alt="" class="img-responsive"></a>
+					</div>
+					<div class="thumb-img">
+						<a class="fancybox" href="images\sample-1.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-1.jpg" alt="" class="img-responsive"></a>
 					</div>
 					<div class="thumb-img">
 						<a class="fancybox" href="images\sample-1.jpg" data-fancybox-group="gallery" title="Cras neque mi, semper leon"><img src="images\sample-1.jpg" alt="" class="img-responsive"></a>
