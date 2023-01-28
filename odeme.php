@@ -28,6 +28,8 @@
 					<th>Toplam Fiyat</th>
 				</tr>
 			</thead>
+			
+			
 			<tbody>
 
 
@@ -89,19 +91,48 @@
 				<li><a href="#bankahavalesi" data-toggle="tab">Banka Havalesi</a></li>
 			</ul>
 			<div id="myTabContent" class="tab-content shop-tab-ct">
-				<div class="tab-pane fade active in" id="kredikarti">
+				
+
+				<div class="tab-pane fade active in" id="desc">
 					<p>
-						Kredi Kartıile ödeme
+						Entegrasyon Tamamlanmadı.
 					</p>
 				</div>
-				<div class="tab-pane fade" id="bankahavalesi">
-					<p>
-						Banka Havalesile ödeme
-					</p>
+
+
+				<div class="tab-pane fade " id="bankahavalesi">
+					<form action="nedmin/netting/islem.php" method="POST">
+
+						<p>Ödeme yapacağınız hesap numarasını seçerek işlemi tamamlayınız.</p>
+
+
+						<?php 
+
+						$bankasor=$db->prepare("SELECT * FROM banka order by banka_id ASC");
+						$bankasor->execute();
+
+						while($bankacek=$bankasor->fetch(PDO::FETCH_ASSOC)) { ?>
+
+
+							<input type="radio" name="siparis_banka" value="<?php echo $bankacek['banka_ad'] ?>">
+							<?php echo $bankacek['banka_ad']; echo " ";?><br>
+
+
+
+
+						<?php } ?>
+
+						<input type="hidden" name="kullanici_id" value="<?php echo $kullanicicek['kullanici_id'] ?>">
+						<input type="hidden" name="siparis_toplam" value="<?php echo $toplam_fiyat ?>">
+						<hr>
+						<button class="btn btn-success" type="submit" name="bankasiparisekle">Sipariş Ver</button>
+
+					</form>
+
 				</div>
 			</div>
 		</div><!-- Ödeme Alanı -->
-		
+
 
 		<div class="spacer"></div>
 	</div>

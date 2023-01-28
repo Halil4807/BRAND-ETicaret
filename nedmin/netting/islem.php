@@ -412,6 +412,72 @@ if (isset($_POST['kullanici_tc'])&&isset($_POST['kullaniciduzenle'])) {
 	}
 }
 
+//Sipariş İşlemleri
+
+if (isset($_POST['bankasiparisekle'])) {
+	//echo "Burdasın";
+	$siparis_tip="Banka Havalesi";
+	$kaydet=$db->prepare("INSERT INTO siparis SET
+		kullanici_id=:kullanici_id,
+		siparis_tip=:siparis_tip,	
+		siparis_banka=:siparis_banka,
+		siparis_toplam=:siparis_toplam
+		");
+	$insert=$kaydet->execute(array(
+		'kullanici_id' => $_POST['kullanici_id'],
+		'siparis_tip' => $siparis_tip,
+		'siparis_banka' => $_POST['siparis_banka'],
+		'siparis_toplam' => $_POST['siparis_toplam']		
+		));
+
+	if ($insert) {
+		//Sipariş başarılı kaydedilirse...
+		$siparis_id = $db->lastInsertId();
+		//echo "<hr>";
+		$kullanici_id=$_POST['kullanici_id'];
+		$sepetsor=$db->prepare("SELECT * FROM sepet where kullanici_id=:id");
+		$sepetsor->execute(array(
+			'id' => $kullanici_id
+			));
+		while($sepetcek=$sepetsor->fetch(PDO::FETCH_ASSOC)) {
+			$urun_id=$sepetcek['urun_id']; 
+			$urun_adet=$sepetcek['urun_adet'];
+
+			$urunsor=$db->prepare("SELECT * FROM urun where urun_id=:id");
+			$urunsor->execute(array(
+				'id' => $urun_id
+				));
+			$uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
+			echo $urun_fiyat=$uruncek['urun_fiyat'];
+			$kaydet=$db->prepare("INSERT INTO siparis_detay SET
+				
+				siparis_id=:siparis_id,
+				urun_id=:urun_id,	
+				urun_fiyat=:urun_fiyat,
+				urun_adet=:urun_adet
+				");
+			$insert=$kaydet->execute(array(
+				'siparis_id' => $siparis_id,
+				'urun_id' => $urun_id,
+				'urun_fiyat' => $urun_fiyat,
+				'urun_adet' => $urun_adet
+
+				));
+		}
+		if ($insert) {
+			//Sipariş detay kayıtta başarıysa sepeti boşalt
+			$sil=$db->prepare("DELETE from sepet where kullanici_id=:kullanici_id");
+			$kontrol=$sil->execute(array(
+				'kullanici_id' => $kullanici_id
+				));
+			Header("Location:../../siparislerim?durum=ok");
+			exit;
+		}
+	} else {
+		Header("Location:../production/siparis.php?durum=no");
+	}
+}
+
 if (isset($_POST['menu_sira'])&&isset($_POST['menuduzenle'])) {
 	$menu_id=$_POST['menu_id'];
 	$menu_ad=$_POST['menu_ad'];
