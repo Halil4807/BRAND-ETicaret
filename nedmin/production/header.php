@@ -62,6 +62,11 @@ if ($say==0) {
   <script src="https://kit.fontawesome.com/9ed6545a59.js" crossorigin="anonymous"></script>
   <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
   <script type="text/javascript">    function geri(){history.back()}  </script>
+  
+ <!-- Dropzone.js ÇOKLU RESİM EKLEME -->
+  <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+  <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
+ <!-- Dropzone.js ÇOKLU RESİM EKLEME -->
 
   <!-- Custom Theme Style -->
   <link href="../build/css/custom.min.css" rel="stylesheet">

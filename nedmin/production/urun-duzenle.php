@@ -231,7 +231,7 @@ $urunresimsor->execute(array(
                       </div>
                     </table>
 
-                    <form action="../netting/islem.php" method="POST" enctype="multipart/form-data"  data-parsley-validate class="form-horizontal form-label-left">
+                    <!-- <form action="../netting/islem.php" method="POST" enctype="multipart/form-data"  data-parsley-validate class="form-horizontal form-label-left">
 
                       <input type="hidden" name="urun_id" value="<?php echo $uruncek['urun_id']; ?>">
                       <div class="form-group">
@@ -245,8 +245,27 @@ $urunresimsor->execute(array(
                         <button type="submit" name="urunresmi_ekle" class="btn btn-success">Ürün Resmi Ekle</button>
                       </div>
 
-                    </form>
+                    </form> -->
 
+                  <div class="x_panel">
+                    <div class="x_title">
+                      <h2>Çoklu resim yükleme işlemleri</h2>
+
+
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                      <p>Yüklenecek resimlerin bulunduğu klasöre giderek tamamını tek seferde seçerek yükleyebilirsiniz.</p>
+                      
+
+                      <form action="../netting/urungaleri.php" class="dropzone" >
+
+                        <input type="hidden" name="urun_id" value="<?php echo $_GET['urun_id'];  ?>">
+                        
+                      </form>
+
+                    </div>
+                  </div>
                   </div>
                 </div>
               </div>

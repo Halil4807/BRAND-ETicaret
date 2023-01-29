@@ -112,11 +112,11 @@ $ilcek2=$db->query("SELECT * FROM iller")->fetchAll(PDO::FETCH_ASSOC);
     								<div class="srchwrap">
     									<div class="row">
     										<div class="col-md-12">
-    											<form class="form-horizontal" role="form">
+    											<form action="arama" method="POST" class="form-horizontal" role="form">
     												<div class="form-group">
-    													<label for="search" class="col-sm-2 control-label">Arama</label>
+    													<button name="arama" class="btn btn-default">Ara</button>  
     													<div class="col-sm-10">
-    														<input type="text" class="form-control" id="search">
+    														<input type="text" class="form-control" minlength="3" id="search" name="arama">
     													</div>
     												</div>
     											</form>
@@ -195,15 +195,18 @@ $ilcek2=$db->query("SELECT * FROM iller")->fetchAll(PDO::FETCH_ASSOC);
     								</div>
     							</div> -->
     							<?php 
-    							$kullanici_id=$kullanicicek['kullanici_id'];
-    							$sepetimsor=$db->prepare("SELECT * FROM sepet where kullanici_id=:id");
-    							$sepetimsor->execute(array(
-    								'id' => $kullanici_id
-    							));
-    							$say=$sepetimsor->rowCount();
-    							if (isset($_SESSION['kullanici_mail'])) {?>
+    							
+    							if (isset($_SESSION['kullanici_mail'])) {
+    								$kullanici_id=$kullanicicek['kullanici_id'];
+    								$sepetimsor=$db->prepare("SELECT * FROM sepet where kullanici_id=:id");
+    								$sepetimsor->execute(array(
+    									'id' => $kullanici_id
+    								));
+    								$say=$sepetimsor->rowCount();
+    								?>
     								<ul class="small-menu"><!--small-nav -->
     									<li><a href="hesabim" class="myacc">Hesabım</a></li>
+    									<li><a href="siparislerim" class="myacc">Siparişlerim</a></li>
     									<li><a href="sepet" class="myshop">Spetim<sup class="allprice"><?php echo $say; ?></sup></a></li>
     									<li><a href="logout.php" class="mycheck">Çıkış Yap</a></li>
     								</ul><!--small-nav -->

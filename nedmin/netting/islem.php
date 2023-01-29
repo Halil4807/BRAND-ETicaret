@@ -428,7 +428,7 @@ if (isset($_POST['bankasiparisekle'])) {
 		'siparis_tip' => $siparis_tip,
 		'siparis_banka' => $_POST['siparis_banka'],
 		'siparis_toplam' => $_POST['siparis_toplam']		
-		));
+	));
 
 	if ($insert) {
 		//Sipariş başarılı kaydedilirse...
@@ -438,7 +438,7 @@ if (isset($_POST['bankasiparisekle'])) {
 		$sepetsor=$db->prepare("SELECT * FROM sepet where kullanici_id=:id");
 		$sepetsor->execute(array(
 			'id' => $kullanici_id
-			));
+		));
 		while($sepetcek=$sepetsor->fetch(PDO::FETCH_ASSOC)) {
 			$urun_id=$sepetcek['urun_id']; 
 			$urun_adet=$sepetcek['urun_adet'];
@@ -446,7 +446,7 @@ if (isset($_POST['bankasiparisekle'])) {
 			$urunsor=$db->prepare("SELECT * FROM urun where urun_id=:id");
 			$urunsor->execute(array(
 				'id' => $urun_id
-				));
+			));
 			$uruncek=$urunsor->fetch(PDO::FETCH_ASSOC);
 			echo $urun_fiyat=$uruncek['urun_fiyat'];
 			$kaydet=$db->prepare("INSERT INTO siparis_detay SET
@@ -461,20 +461,27 @@ if (isset($_POST['bankasiparisekle'])) {
 				'urun_id' => $urun_id,
 				'urun_fiyat' => $urun_fiyat,
 				'urun_adet' => $urun_adet
+			));
+			$urunstok=$uruncek['urun_fiyat']-$urun_fiyat;
+			$uruneksiltme=$db->prepare("UPDATE urun SET
+				urun_stok=:urun_stok
+				WHERE urun_id={$urun_id}");
 
-				));
+			$update=$uruneksiltme->execute(array(
+				'urun_stok' => $urunstok
+			));
 		}
 		if ($insert) {
 			//Sipariş detay kayıtta başarıysa sepeti boşalt
 			$sil=$db->prepare("DELETE from sepet where kullanici_id=:kullanici_id");
 			$kontrol=$sil->execute(array(
 				'kullanici_id' => $kullanici_id
-				));
+			));
 			Header("Location:../../siparislerim?durum=ok");
 			exit;
 		}
 	} else {
-		Header("Location:../production/siparis.php?durum=no");
+		Header("Location:../production/odeme.php?durum=no");
 	}
 }
 
