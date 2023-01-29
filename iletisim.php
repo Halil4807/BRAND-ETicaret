@@ -41,7 +41,7 @@
 		</div>
 	</div>
 </div>
-
+<!-- 
 <div class="title-bg">
 	<div class="title">iletişim Formu</div>
 </div>
@@ -74,7 +74,7 @@
 			<input type="text" name="islem"  placeholder="<?php echo $sayi1." + ".$sayi2. " kaçtır ?";  ?>" class="form-control" id="name">
 		</div>
 		<button type="submit" class="btn btn-default btn-red btn-sm">Formu Gönder</button>
-	</form>
+	</form> -->
 </div>
 <div class="spacer"></div>
 
